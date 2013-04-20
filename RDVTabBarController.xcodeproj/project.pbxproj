@@ -10,12 +10,14 @@
 		B4616BAF17228DF700863892 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BAE17228DF700863892 /* UIKit.framework */; };
 		B4616BB117228DF700863892 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB017228DF700863892 /* Foundation.framework */; };
 		B4616BB317228DF700863892 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB217228DF700863892 /* CoreGraphics.framework */; };
-		B4616BB917228DF700863892 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4616BB717228DF700863892 /* InfoPlist.strings */; };
-		B4616BBB17228DF700863892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BBA17228DF700863892 /* main.m */; };
-		B4616BBF17228DF700863892 /* RDVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BBE17228DF700863892 /* RDVAppDelegate.m */; };
-		B4616BC117228DF700863892 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC017228DF700863892 /* Default.png */; };
-		B4616BC317228DF700863892 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC217228DF700863892 /* Default@2x.png */; };
-		B4616BC517228DF700863892 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC417228DF700863892 /* Default-568h@2x.png */; };
+		B4616C00172298FE00863892 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BF5172298FE00863892 /* Default-568h@2x.png */; };
+		B4616C01172298FE00863892 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BF6172298FE00863892 /* Default.png */; };
+		B4616C02172298FE00863892 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BF7172298FE00863892 /* Default@2x.png */; };
+		B4616C03172298FE00863892 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4616BF9172298FE00863892 /* InfoPlist.strings */; };
+		B4616C04172298FE00863892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BFB172298FE00863892 /* main.m */; };
+		B4616C0C1722995D00863892 /* RDVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616C0A1722995D00863892 /* RDVAppDelegate.m */; };
+		B49817A617229BB500AD294C /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A517229BB500AD294C /* RDVTabBar.m */; };
+		B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A817229CBC00AD294C /* RDVTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,15 +25,19 @@
 		B4616BAE17228DF700863892 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B4616BB017228DF700863892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4616BB217228DF700863892 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B4616BB617228DF700863892 /* RDVTabBarController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RDVTabBarController-Info.plist"; sourceTree = "<group>"; };
-		B4616BB817228DF700863892 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B4616BBA17228DF700863892 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B4616BBC17228DF700863892 /* RDVTabBarController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RDVTabBarController-Prefix.pch"; sourceTree = "<group>"; };
-		B4616BBD17228DF700863892 /* RDVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDVAppDelegate.h; sourceTree = "<group>"; };
-		B4616BBE17228DF700863892 /* RDVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDVAppDelegate.m; sourceTree = "<group>"; };
-		B4616BC017228DF700863892 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		B4616BC217228DF700863892 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		B4616BC417228DF700863892 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B4616BF5172298FE00863892 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B4616BF6172298FE00863892 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B4616BF7172298FE00863892 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B4616BFA172298FE00863892 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		B4616BFB172298FE00863892 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B4616BFE172298FE00863892 /* RDVTabBarController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RDVTabBarController-Info.plist"; sourceTree = "<group>"; };
+		B4616BFF172298FE00863892 /* RDVTabBarController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RDVTabBarController-Prefix.pch"; sourceTree = "<group>"; };
+		B4616C091722995D00863892 /* RDVAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVAppDelegate.h; sourceTree = "<group>"; };
+		B4616C0A1722995D00863892 /* RDVAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVAppDelegate.m; sourceTree = "<group>"; };
+		B49817A417229BB500AD294C /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
+		B49817A517229BB500AD294C /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
+		B49817A717229CBC00AD294C /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
+		B49817A817229CBC00AD294C /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				B4616BB417228DF700863892 /* RDVTabBarController */,
+				B4616BF4172298E100863892 /* Example */,
 				B4616BAD17228DF700863892 /* Frameworks */,
 				B4616BAC17228DF700863892 /* Products */,
 			);
@@ -78,23 +85,58 @@
 		B4616BB417228DF700863892 /* RDVTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				B4616BBD17228DF700863892 /* RDVAppDelegate.h */,
-				B4616BBE17228DF700863892 /* RDVAppDelegate.m */,
-				B4616BB517228DF700863892 /* Supporting Files */,
+				B49817A417229BB500AD294C /* RDVTabBar.h */,
+				B49817A517229BB500AD294C /* RDVTabBar.m */,
+				B49817A717229CBC00AD294C /* RDVTabBarController.h */,
+				B49817A817229CBC00AD294C /* RDVTabBarController.m */,
 			);
 			path = RDVTabBarController;
 			sourceTree = "<group>";
 		};
-		B4616BB517228DF700863892 /* Supporting Files */ = {
+		B4616BF4172298E100863892 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				B4616BB617228DF700863892 /* RDVTabBarController-Info.plist */,
-				B4616BB717228DF700863892 /* InfoPlist.strings */,
-				B4616BBA17228DF700863892 /* main.m */,
-				B4616BBC17228DF700863892 /* RDVTabBarController-Prefix.pch */,
-				B4616BC017228DF700863892 /* Default.png */,
-				B4616BC217228DF700863892 /* Default@2x.png */,
-				B4616BC417228DF700863892 /* Default-568h@2x.png */,
+				B4616C071722995D00863892 /* Classes */,
+				B4616C0D1722996200863892 /* Supporting Files */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		B4616C071722995D00863892 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B4616C081722995D00863892 /* App Delegate */,
+				B4616C0B1722995D00863892 /* Controllers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B4616C081722995D00863892 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				B4616C091722995D00863892 /* RDVAppDelegate.h */,
+				B4616C0A1722995D00863892 /* RDVAppDelegate.m */,
+			);
+			path = "App Delegate";
+			sourceTree = "<group>";
+		};
+		B4616C0B1722995D00863892 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B4616C0D1722996200863892 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B4616BF5172298FE00863892 /* Default-568h@2x.png */,
+				B4616BF6172298FE00863892 /* Default.png */,
+				B4616BF7172298FE00863892 /* Default@2x.png */,
+				B4616BF9172298FE00863892 /* InfoPlist.strings */,
+				B4616BFB172298FE00863892 /* main.m */,
+				B4616BFE172298FE00863892 /* RDVTabBarController-Info.plist */,
+				B4616BFF172298FE00863892 /* RDVTabBarController-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -151,10 +193,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4616BB917228DF700863892 /* InfoPlist.strings in Resources */,
-				B4616BC117228DF700863892 /* Default.png in Resources */,
-				B4616BC317228DF700863892 /* Default@2x.png in Resources */,
-				B4616BC517228DF700863892 /* Default-568h@2x.png in Resources */,
+				B4616C00172298FE00863892 /* Default-568h@2x.png in Resources */,
+				B4616C01172298FE00863892 /* Default.png in Resources */,
+				B4616C02172298FE00863892 /* Default@2x.png in Resources */,
+				B4616C03172298FE00863892 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,20 +207,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4616BBB17228DF700863892 /* main.m in Sources */,
-				B4616BBF17228DF700863892 /* RDVAppDelegate.m in Sources */,
+				B4616C04172298FE00863892 /* main.m in Sources */,
+				B4616C0C1722995D00863892 /* RDVAppDelegate.m in Sources */,
+				B49817A617229BB500AD294C /* RDVTabBar.m in Sources */,
+				B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B4616BB717228DF700863892 /* InfoPlist.strings */ = {
+		B4616BF9172298FE00863892 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B4616BB817228DF700863892 /* en */,
+				B4616BFA172298FE00863892 /* en */,
 			);
 			name = InfoPlist.strings;
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -246,8 +291,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RDVTabBarController/RDVTabBarController-Prefix.pch";
-				INFOPLIST_FILE = "RDVTabBarController/RDVTabBarController-Info.plist";
+				GCC_PREFIX_HEADER = "Example/RDVTabBarController-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Example/RDVTabBarController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -257,8 +303,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RDVTabBarController/RDVTabBarController-Prefix.pch";
-				INFOPLIST_FILE = "RDVTabBarController/RDVTabBarController-Info.plist";
+				GCC_PREFIX_HEADER = "Example/RDVTabBarController-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Example/RDVTabBarController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -283,6 +330,7 @@
 				B4616BCA17228DF700863892 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
