@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B4616BAF17228DF700863892 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BAE17228DF700863892 /* UIKit.framework */; };
+		B4616BB117228DF700863892 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB017228DF700863892 /* Foundation.framework */; };
+		B4616BB317228DF700863892 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB217228DF700863892 /* CoreGraphics.framework */; };
+		B4616BB917228DF700863892 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4616BB717228DF700863892 /* InfoPlist.strings */; };
+		B4616BBB17228DF700863892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BBA17228DF700863892 /* main.m */; };
+		B4616BBF17228DF700863892 /* RDVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BBE17228DF700863892 /* RDVAppDelegate.m */; };
+		B4616BC117228DF700863892 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC017228DF700863892 /* Default.png */; };
+		B4616BC317228DF700863892 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC217228DF700863892 /* Default@2x.png */; };
+		B4616BC517228DF700863892 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4616BC417228DF700863892 /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B4616BAB17228DF700863892 /* RDVTabBarController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDVTabBarController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4616BAE17228DF700863892 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B4616BB017228DF700863892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B4616BB217228DF700863892 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B4616BB617228DF700863892 /* RDVTabBarController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RDVTabBarController-Info.plist"; sourceTree = "<group>"; };
+		B4616BB817228DF700863892 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B4616BBA17228DF700863892 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B4616BBC17228DF700863892 /* RDVTabBarController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RDVTabBarController-Prefix.pch"; sourceTree = "<group>"; };
+		B4616BBD17228DF700863892 /* RDVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDVAppDelegate.h; sourceTree = "<group>"; };
+		B4616BBE17228DF700863892 /* RDVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDVAppDelegate.m; sourceTree = "<group>"; };
+		B4616BC017228DF700863892 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B4616BC217228DF700863892 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B4616BC417228DF700863892 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B4616BA817228DF700863892 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4616BAF17228DF700863892 /* UIKit.framework in Frameworks */,
+				B4616BB117228DF700863892 /* Foundation.framework in Frameworks */,
+				B4616BB317228DF700863892 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B4616BA217228DF700863892 = {
+			isa = PBXGroup;
+			children = (
+				B4616BB417228DF700863892 /* RDVTabBarController */,
+				B4616BAD17228DF700863892 /* Frameworks */,
+				B4616BAC17228DF700863892 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B4616BAC17228DF700863892 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4616BAB17228DF700863892 /* RDVTabBarController.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4616BAD17228DF700863892 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4616BAE17228DF700863892 /* UIKit.framework */,
+				B4616BB017228DF700863892 /* Foundation.framework */,
+				B4616BB217228DF700863892 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4616BB417228DF700863892 /* RDVTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				B4616BBD17228DF700863892 /* RDVAppDelegate.h */,
+				B4616BBE17228DF700863892 /* RDVAppDelegate.m */,
+				B4616BB517228DF700863892 /* Supporting Files */,
+			);
+			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		B4616BB517228DF700863892 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B4616BB617228DF700863892 /* RDVTabBarController-Info.plist */,
+				B4616BB717228DF700863892 /* InfoPlist.strings */,
+				B4616BBA17228DF700863892 /* main.m */,
+				B4616BBC17228DF700863892 /* RDVTabBarController-Prefix.pch */,
+				B4616BC017228DF700863892 /* Default.png */,
+				B4616BC217228DF700863892 /* Default@2x.png */,
+				B4616BC417228DF700863892 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B4616BAA17228DF700863892 /* RDVTabBarController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4616BC817228DF700863892 /* Build configuration list for PBXNativeTarget "RDVTabBarController" */;
+			buildPhases = (
+				B4616BA717228DF700863892 /* Sources */,
+				B4616BA817228DF700863892 /* Frameworks */,
+				B4616BA917228DF700863892 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RDVTabBarController;
+			productName = RDVTabBarController;
+			productReference = B4616BAB17228DF700863892 /* RDVTabBarController.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B4616BA317228DF700863892 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RDV;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Robert Dimitrov";
+			};
+			buildConfigurationList = B4616BA617228DF700863892 /* Build configuration list for PBXProject "RDVTabBarController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B4616BA217228DF700863892;
+			productRefGroup = B4616BAC17228DF700863892 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B4616BAA17228DF700863892 /* RDVTabBarController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B4616BA917228DF700863892 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4616BB917228DF700863892 /* InfoPlist.strings in Resources */,
+				B4616BC117228DF700863892 /* Default.png in Resources */,
+				B4616BC317228DF700863892 /* Default@2x.png in Resources */,
+				B4616BC517228DF700863892 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B4616BA717228DF700863892 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4616BBB17228DF700863892 /* main.m in Sources */,
+				B4616BBF17228DF700863892 /* RDVAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B4616BB717228DF700863892 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4616BB817228DF700863892 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B4616BC617228DF700863892 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B4616BC717228DF700863892 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B4616BC917228DF700863892 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RDVTabBarController/RDVTabBarController-Prefix.pch";
+				INFOPLIST_FILE = "RDVTabBarController/RDVTabBarController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B4616BCA17228DF700863892 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RDVTabBarController/RDVTabBarController-Prefix.pch";
+				INFOPLIST_FILE = "RDVTabBarController/RDVTabBarController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B4616BA617228DF700863892 /* Build configuration list for PBXProject "RDVTabBarController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4616BC617228DF700863892 /* Debug */,
+				B4616BC717228DF700863892 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B4616BC817228DF700863892 /* Build configuration list for PBXNativeTarget "RDVTabBarController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4616BC917228DF700863892 /* Debug */,
+				B4616BCA17228DF700863892 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B4616BA317228DF700863892 /* Project object */;
+}
