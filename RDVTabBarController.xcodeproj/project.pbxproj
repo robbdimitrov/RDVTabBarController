@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B435F4F917396A8D00297C82 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B435F4F817396A8D00297C82 /* RDVTabBarItem.m */; };
+		B435F5421739811F00297C82 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F53E1739811F00297C82 /* first.png */; };
+		B435F5431739811F00297C82 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F53F1739811F00297C82 /* first@2x.png */; };
+		B435F5441739811F00297C82 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F5401739811F00297C82 /* second.png */; };
+		B435F5451739811F00297C82 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F5411739811F00297C82 /* second@2x.png */; };
+		B435F54A173981FE00297C82 /* tabbar_selected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F546173981FE00297C82 /* tabbar_selected_background.png */; };
+		B435F54B173981FE00297C82 /* tabbar_selected_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F547173981FE00297C82 /* tabbar_selected_background@2x.png */; };
+		B435F54C173981FE00297C82 /* tabbar_unselected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F548173981FE00297C82 /* tabbar_unselected_background.png */; };
+		B435F54D173981FE00297C82 /* tabbar_unselected_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B435F549173981FE00297C82 /* tabbar_unselected_background@2x.png */; };
 		B4616BAF17228DF700863892 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BAE17228DF700863892 /* UIKit.framework */; };
 		B4616BB117228DF700863892 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB017228DF700863892 /* Foundation.framework */; };
 		B4616BB317228DF700863892 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB217228DF700863892 /* CoreGraphics.framework */; };
@@ -16,11 +25,24 @@
 		B4616C03172298FE00863892 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4616BF9172298FE00863892 /* InfoPlist.strings */; };
 		B4616C04172298FE00863892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616BFB172298FE00863892 /* main.m */; };
 		B4616C0C1722995D00863892 /* RDVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4616C0A1722995D00863892 /* RDVAppDelegate.m */; };
+		B465733A1725A23D00319236 /* RDVFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46573391725A23D00319236 /* RDVFirstViewController.m */; };
+		B465733D1725A24700319236 /* RDVSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465733C1725A24700319236 /* RDVSecondViewController.m */; };
+		B46573401725A25100319236 /* RDVThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465733F1725A25100319236 /* RDVThirdViewController.m */; };
 		B49817A617229BB500AD294C /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A517229BB500AD294C /* RDVTabBar.m */; };
 		B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A817229CBC00AD294C /* RDVTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B435F4F717396A8D00297C82 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
+		B435F4F817396A8D00297C82 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
+		B435F53E1739811F00297C82 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		B435F53F1739811F00297C82 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		B435F5401739811F00297C82 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		B435F5411739811F00297C82 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		B435F546173981FE00297C82 /* tabbar_selected_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_selected_background.png; sourceTree = "<group>"; };
+		B435F547173981FE00297C82 /* tabbar_selected_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_selected_background@2x.png"; sourceTree = "<group>"; };
+		B435F548173981FE00297C82 /* tabbar_unselected_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_unselected_background.png; sourceTree = "<group>"; };
+		B435F549173981FE00297C82 /* tabbar_unselected_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_unselected_background@2x.png"; sourceTree = "<group>"; };
 		B4616BAB17228DF700863892 /* RDVTabBarController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDVTabBarController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4616BAE17228DF700863892 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B4616BB017228DF700863892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -34,6 +56,12 @@
 		B4616BFF172298FE00863892 /* RDVTabBarController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RDVTabBarController-Prefix.pch"; sourceTree = "<group>"; };
 		B4616C091722995D00863892 /* RDVAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVAppDelegate.h; sourceTree = "<group>"; };
 		B4616C0A1722995D00863892 /* RDVAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVAppDelegate.m; sourceTree = "<group>"; };
+		B46573381725A23D00319236 /* RDVFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVFirstViewController.h; sourceTree = "<group>"; };
+		B46573391725A23D00319236 /* RDVFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVFirstViewController.m; sourceTree = "<group>"; };
+		B465733B1725A24700319236 /* RDVSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVSecondViewController.h; sourceTree = "<group>"; };
+		B465733C1725A24700319236 /* RDVSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVSecondViewController.m; sourceTree = "<group>"; };
+		B465733E1725A25100319236 /* RDVThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVThirdViewController.h; sourceTree = "<group>"; };
+		B465733F1725A25100319236 /* RDVThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVThirdViewController.m; sourceTree = "<group>"; };
 		B49817A417229BB500AD294C /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		B49817A517229BB500AD294C /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		B49817A717229CBC00AD294C /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -54,6 +82,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B435F53D1739811F00297C82 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B435F53E1739811F00297C82 /* first.png */,
+				B435F53F1739811F00297C82 /* first@2x.png */,
+				B435F5401739811F00297C82 /* second.png */,
+				B435F5411739811F00297C82 /* second@2x.png */,
+				B435F546173981FE00297C82 /* tabbar_selected_background.png */,
+				B435F547173981FE00297C82 /* tabbar_selected_background@2x.png */,
+				B435F548173981FE00297C82 /* tabbar_unselected_background.png */,
+				B435F549173981FE00297C82 /* tabbar_unselected_background@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		B4616BA217228DF700863892 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +128,8 @@
 		B4616BB417228DF700863892 /* RDVTabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				B435F4F717396A8D00297C82 /* RDVTabBarItem.h */,
+				B435F4F817396A8D00297C82 /* RDVTabBarItem.m */,
 				B49817A417229BB500AD294C /* RDVTabBar.h */,
 				B49817A517229BB500AD294C /* RDVTabBar.m */,
 				B49817A717229CBC00AD294C /* RDVTabBarController.h */,
@@ -97,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				B4616C071722995D00863892 /* Classes */,
+				B435F53D1739811F00297C82 /* Images */,
 				B4616C0D1722996200863892 /* Supporting Files */,
 			);
 			path = Example;
@@ -123,6 +169,12 @@
 		B4616C0B1722995D00863892 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B46573381725A23D00319236 /* RDVFirstViewController.h */,
+				B46573391725A23D00319236 /* RDVFirstViewController.m */,
+				B465733B1725A24700319236 /* RDVSecondViewController.h */,
+				B465733C1725A24700319236 /* RDVSecondViewController.m */,
+				B465733E1725A25100319236 /* RDVThirdViewController.h */,
+				B465733F1725A25100319236 /* RDVThirdViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -197,6 +249,14 @@
 				B4616C01172298FE00863892 /* Default.png in Resources */,
 				B4616C02172298FE00863892 /* Default@2x.png in Resources */,
 				B4616C03172298FE00863892 /* InfoPlist.strings in Resources */,
+				B435F5421739811F00297C82 /* first.png in Resources */,
+				B435F5431739811F00297C82 /* first@2x.png in Resources */,
+				B435F5441739811F00297C82 /* second.png in Resources */,
+				B435F5451739811F00297C82 /* second@2x.png in Resources */,
+				B435F54A173981FE00297C82 /* tabbar_selected_background.png in Resources */,
+				B435F54B173981FE00297C82 /* tabbar_selected_background@2x.png in Resources */,
+				B435F54C173981FE00297C82 /* tabbar_unselected_background.png in Resources */,
+				B435F54D173981FE00297C82 /* tabbar_unselected_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +271,10 @@
 				B4616C0C1722995D00863892 /* RDVAppDelegate.m in Sources */,
 				B49817A617229BB500AD294C /* RDVTabBar.m in Sources */,
 				B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */,
+				B465733A1725A23D00319236 /* RDVFirstViewController.m in Sources */,
+				B465733D1725A24700319236 /* RDVSecondViewController.m in Sources */,
+				B46573401725A25100319236 /* RDVThirdViewController.m in Sources */,
+				B435F4F917396A8D00297C82 /* RDVTabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,13 @@
 // THE SOFTWARE.
 
 #import "RDVTabBar.h"
+#import "RDVTabBarItem.h"
+
+@interface RDVTabBar ()
+
+@property (nonatomic) CGFloat itemOffset;
+
+@end
 
 @implementation RDVTabBar
 
@@ -28,9 +35,42 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _itemWidth = 0;
+        _itemOffset = 0;
     }
     return self;
+}
+
+- (id)init {
+    return [self initWithFrame:CGRectZero];
+}
+
+- (void)layoutSubviews {
+    if (![self itemWidth]) {
+        [self setItemWidth:self.frame.size.width / [[self items] count]];
+    }
+    
+    for (NSInteger i = 0; i < [[self items] count]; i++) {
+        RDVTabBarItem *item = [[self items] objectAtIndex:i];
+        [item setFrame:CGRectMake(self.itemOffset + (i * self.itemWidth), 0, self.itemWidth, self.frame.size.height)];
+    }
+}
+
+- (void)setItemWidth:(CGFloat)itemWidth {
+    if (itemWidth > 0) {
+        _itemWidth = itemWidth;
+    }
+}
+
+- (void)setItems:(NSArray *)items {
+    for (RDVTabBarItem *item in items) {
+        [item removeFromSuperview];
+    }
+    
+    _items = [items copy];
+    for (RDVTabBarItem *item in items) {
+        [self addSubview:item];
+    }
 }
 
 @end

@@ -1,4 +1,4 @@
-// RDVTabBarController.h
+// RDVSecondViewController.h
 //
 // Copyright (c) 2013 Robert Dimitrov
 //
@@ -21,32 +21,9 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "RDVTabBar.h"
 
-@protocol RDVTabBarControllerDelegate;
+@interface RDVSecondViewController : UIViewController
 
-@interface RDVTabBarController : UIViewController <RDVTabBarDelegate>
-
-@property (nonatomic, weak) id<RDVTabBarControllerDelegate> delegate;
-@property (nonatomic, copy) NSArray *viewControllers;
-@property (nonatomic, readonly) RDVTabBar *tabBar;
-@property (nonatomic, weak) UIViewController *selectedViewController;
-@property (nonatomic) NSUInteger selectedIndex;
-@property (nonatomic) CGFloat tabBarHeight;
-
-@end
-
-@protocol RDVTabBarControllerDelegate <NSObject>
-@optional
-
-- (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
-- (void)tabBarController:(RDVTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
-
-@end
-
-@interface UIViewController (RDVTabBarControllerItem)
-
-@property(nonatomic, strong, setter = rdv_setTabBarItem:) RDVTabBarItem *rdv_tabBarItem;
-@property(nonatomic, readonly, strong) RDVTabBarController *rdv_tabBarController;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end

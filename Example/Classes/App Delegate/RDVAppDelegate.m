@@ -21,19 +21,53 @@
 // THE SOFTWARE.
 
 #import "RDVAppDelegate.h"
+#import "RDVFirstViewController.h"
+#import "RDVSecondViewController.h"
+#import "RDVThirdViewController.h"
+#import "RDVTabBarController.h"
 
 @implementation RDVAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    
-    [self.window setRootViewController:[[UIViewController alloc] init]];
-    
+    [self setupViewControllers];
+    [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+#pragma mark - Methods
+
+- (void)setupViewControllers {
+    UIViewController *firstViewController = [[RDVFirstViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    
+    UIViewController *secondViewController = [[RDVSecondViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
+    
+    UIViewController *thirdViewController = [[RDVThirdViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *thirdNavigationController = [[UINavigationController alloc] initWithRootViewController:thirdViewController];
+    
+    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
+    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController, thirdNavigationController]];
+    self.viewController = tabBarController;
+    
+    [self customizeTabBarForController:tabBarController];
+}
+
+- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
+    UIImage *finishedImage = [[UIImage imageNamed:@"tabbar_selected_background"]
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
+    UIImage *unfinishedImage = [[UIImage imageNamed:@"tabbar_unselected_background"]
+                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
+    [tabBarController setTabBarHeight:63];
+    for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
+        [item setFinishedSelectedImage:finishedImage withFinishedUnselectedImage:unfinishedImage];
+        [item setImage:[UIImage imageNamed:@"first"]];
+    }
 }
 
 @end

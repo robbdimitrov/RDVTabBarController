@@ -21,16 +21,22 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "RDVTabBarItem.h"
 
 @class RDVTabBar;
 
 @protocol RDVTabBarDelegate <NSObject>
+
+- (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index;
+- (void)tabBar:(RDVTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index;
 
 @end
 
 @interface RDVTabBar : UIView
 
 @property id <RDVTabBarDelegate> delegate;
-@property(nonatomic, copy) NSArray *items;
+@property (nonatomic, copy) NSArray *items;
+@property (nonatomic, weak) RDVTabBarItem *selectedItem;
+@property (nonatomic) CGFloat itemWidth;
 
 @end
