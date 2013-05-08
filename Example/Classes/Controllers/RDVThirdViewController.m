@@ -48,8 +48,9 @@
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, applicationFrame.size.height / - 40 / 2,
                                                                 applicationFrame.size.width - 2 * 20, 40)];
-    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:30]];
+    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:26]];
     [self.titleLabel setText:self.title];
+    [self.titleLabel setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
     [view addSubview:self.titleLabel];
     
     self.view = view;

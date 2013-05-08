@@ -1,7 +1,5 @@
 # RDVTabBarController
 
-!Under active development
-
 ## Requirements
 
 * ARC

@@ -50,15 +50,12 @@
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, applicationFrame.size.height / - 40 / 2,
                                                                 applicationFrame.size.width - 2 * 20, 40)];
-    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:30]];
+    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:26]];
+    [self.titleLabel setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
     [self.titleLabel setText:self.title];
     [view addSubview:self.titleLabel];
     
     self.view = view;
-}
-
-- (void)viewDidLoad {
-    [[self rdv_tabBarItem] setImage:[UIImage imageNamed:@"first"]];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {

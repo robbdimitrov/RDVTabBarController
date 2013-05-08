@@ -10,6 +10,9 @@
 
 @interface RDVTabBarItem ()
 
+@property (nonatomic) UIImage *selectedImage;
+@property (nonatomic) UIImage *unselectedImage;
+
 @end
 
 @implementation RDVTabBarItem
@@ -37,11 +40,14 @@
 
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage {
     if (selectedImage) {
+        [self setSelectedImage:selectedImage];
+        [self setBackgroundImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
         [self setBackgroundImage:selectedImage forState:UIControlStateSelected];
         [self setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
     }
     
     if (unselectedImage) {
+        [self setUnselectedImage:unselectedImage];
         [self setBackgroundImage:unselectedImage forState:UIControlStateNormal];
     }
 }
@@ -52,6 +58,15 @@
 
 - (UIImage *)image {
     return [self imageForState:UIControlStateNormal];
+}
+
+- (void)changeSelected:(BOOL)selected {
+    [self setSelected:selected];
+    if (selected) {
+//        [self setBackgroundImage:[self selectedImage] forState:UIControlStateNormal];
+    } else {
+//        [self setBackgroundImage:[self unselectedImage] forState:UIControlStateNormal];
+    }
 }
 
 @end

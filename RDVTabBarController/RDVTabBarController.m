@@ -36,6 +36,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _tabBarHeight = 49;
+        _selectedIndex = 0;
     }
     return self;
 }
@@ -59,7 +60,17 @@
 }
 
 - (void)viewWillLayoutSubviews {
+    [[self.selectedViewController view] setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.tabBarHeight)];
     [self.tabBar setFrame:CGRectMake(0, self.view.frame.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setSelectedViewController:[self viewControllers][[self selectedIndex]]];
+    [self addChildViewController:[self selectedViewController]];
+    [[self view] addSubview:[[self selectedViewController] view]];
+    [[self tabBar] setSelectedItem:[[[self tabBar] items] objectAtIndex:0]];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -120,7 +131,8 @@
 - (RDVTabBar *)tabBar {
     if (!_tabBar) {
         _tabBar = [[RDVTabBar alloc] init];
-        [_tabBar setBackgroundColor:[UIColor lightGrayColor]];//blackColor]];
+        [_tabBar setBackgroundColor:[UIColor blackColor]];
+        [_tabBar setDelegate:self];
     }
     
     return _tabBar;
@@ -141,7 +153,19 @@
 }
 
 - (void)tabBar:(RDVTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index {
+    if (index < 0 || index >= [[self viewControllers] count]) {
+        return;
+    }
     
+    if ([self selectedViewController]) {
+        [[[self selectedViewController] view] removeFromSuperview];
+        [[self selectedViewController] removeFromParentViewController];
+    }
+    
+    [self setSelectedIndex:index];
+    [self setSelectedViewController:[self viewControllers][index]];
+    [self addChildViewController:[self selectedViewController]];
+    [[self view] addSubview:[[self selectedViewController] view]];
 }
 
 @end

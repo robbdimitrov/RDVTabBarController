@@ -17,4 +17,6 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) UIImage *image;
 
+- (void)changeSelected:(BOOL)selected;
+
 @end

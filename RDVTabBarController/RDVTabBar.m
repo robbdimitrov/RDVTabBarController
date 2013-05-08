@@ -69,8 +69,36 @@
     
     _items = [items copy];
     for (RDVTabBarItem *item in items) {
+        [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
     }
+}
+
+- (void)tabBarItemWasSelected:(id)sender {
+    if ([self selectedItem] && [[self delegate] respondsToSelector:@selector(tabBar:shouldSelectItemAtIndex:)]) {
+        NSInteger index = [self.items indexOfObject:self.selectedItem];
+        if (![[self delegate] tabBar:self shouldSelectItemAtIndex:index]) {
+            return;
+        }
+    }
+    
+    [[self selectedItem] changeSelected:NO];
+    
+    [self setSelectedItem:sender];
+    [(RDVTabBarItem *)sender changeSelected:YES];
+    
+    if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {
+        NSInteger index = [self.items indexOfObject:self.selectedItem];
+        [[self delegate] tabBar:self didSelectItemAtIndex:index];
+    }
+}
+
+- (void)setSelectedItem:(RDVTabBarItem *)selectedItem {
+    if (selectedItem == _selectedItem) {
+        return;
+    }
+    _selectedItem = selectedItem;
+    [_selectedItem changeSelected:YES];
 }
 
 @end
