@@ -17,17 +17,38 @@
 
 @implementation RDVTabBarItem
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [self.titleLabel setMinimumFontSize:8];
     }
     return self;
 }
 
-- (id)init {
-    return [self initWithFrame:CGRectZero];
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if ([[[self titleLabel] text] length]) {
+        CGFloat width = CGRectGetWidth(self.frame);
+        CGFloat height = CGRectGetHeight(self.frame);
+        CGFloat imageWidth = CGRectGetWidth(self.imageView.frame);
+        CGFloat imageHeight = CGRectGetHeight(self.imageView.frame);
+        
+        if (![[[self titleLabel] text] length]) {
+            [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), roundf(height / 2 - imageHeight / 2),
+                                                  imageWidth, imageHeight)];
+            [[self titleLabel] setFrame:CGRectZero];
+        } else {
+            CGSize titleSize = [[self titleLabel] sizeThatFits:CGSizeMake(width, 20)];
+            CGFloat imageStartingY = roundf((height - imageHeight - titleSize.height) / 2);
+            
+            [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), imageStartingY,
+                                                  imageWidth, imageHeight)];
+            [[self titleLabel] setFrame:CGRectMake(roundf(width / 2 - titleSize.width / 2),
+                                                   CGRectGetMaxY(self.imageView.frame), titleSize.width, titleSize.height)];
+        }
+    }
 }
 
 - (UIImage *)finishedSelectedImage {
@@ -54,6 +75,9 @@
 
 - (void)setImage:(UIImage *)image {
     [self setImage:image forState:UIControlStateNormal];
+    [self setImage:image forState:UIControlStateSelected|UIControlStateHighlighted];
+    [self setImage:image forState:UIControlStateSelected];
+    [self setImage:image forState:UIControlStateHighlighted];
 }
 
 - (UIImage *)image {
@@ -62,11 +86,6 @@
 
 - (void)changeSelected:(BOOL)selected {
     [self setSelected:selected];
-    if (selected) {
-//        [self setBackgroundImage:[self selectedImage] forState:UIControlStateNormal];
-    } else {
-//        [self setBackgroundImage:[self unselectedImage] forState:UIControlStateNormal];
-    }
 }
 
 @end

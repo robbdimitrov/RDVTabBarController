@@ -26,6 +26,7 @@
 @interface RDVTabBarController ()
 
 @property (nonatomic, readwrite) RDVTabBar *tabBar;
+@property (nonatomic, readwrite) UIView *contentView;
 
 @end
 
@@ -52,16 +53,25 @@
     
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [view setBackgroundColor:[UIColor whiteColor]];
+    [view setBackgroundColor:[UIColor blueColor]];
     
+    [view addSubview:self.contentView];
     [view addSubview:self.tabBar];
     
     self.view = view;
 }
 
 - (void)viewWillLayoutSubviews {
-    [[self.selectedViewController view] setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.tabBarHeight)];
-    [self.tabBar setFrame:CGRectMake(0, self.view.frame.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight)];
+    CGSize viewSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    
+    if (!self.parentViewController) {
+        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+            viewSize = CGSizeMake(CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame));
+        }
+    }
+    
+    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height - self.tabBarHeight)];
+    [self.tabBar setFrame:CGRectMake(0, viewSize.height - self.tabBarHeight, viewSize.width, self.tabBarHeight)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,8 +79,8 @@
     
     [self setSelectedViewController:[self viewControllers][[self selectedIndex]]];
     [self addChildViewController:[self selectedViewController]];
-    [[self view] addSubview:[[self selectedViewController] view]];
-    [[self tabBar] setSelectedItem:[[[self tabBar] items] objectAtIndex:0]];
+    [[self contentView] addSubview:[[self selectedViewController] view]];
+    [[self tabBar] setSelectedItem:[[[self tabBar] items] objectAtIndex:[self selectedIndex]]];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -106,6 +116,19 @@
 
 #pragma mark - Methods
 
+- (void)backButtonTapped:(id)sender {
+    if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
+        
+        if ([selectedController topViewController] != [selectedController viewControllers][0]) {
+            [selectedController popViewControllerAnimated:YES];
+            return;
+        }
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (UIViewController *)selectedViewController {
     return [[self viewControllers] objectAtIndex:[self selectedIndex]];
 }
@@ -118,7 +141,7 @@
         
         for (UIViewController *viewController in viewControllers) {
             RDVTabBarItem *tabBarItem = [[RDVTabBarItem alloc] init];
-            [tabBarItem setTitle:viewController.title];
+            [tabBarItem setTitle:viewController.title forState:UIControlStateNormal];
             [tabBarItems addObject:tabBarItem];
         }
         
@@ -126,16 +149,6 @@
     } else {
         _viewControllers = nil;
     }
-}
-
-- (RDVTabBar *)tabBar {
-    if (!_tabBar) {
-        _tabBar = [[RDVTabBar alloc] init];
-        [_tabBar setBackgroundColor:[UIColor blackColor]];
-        [_tabBar setDelegate:self];
-    }
-    
-    return _tabBar;
 }
 
 - (NSInteger)indexForViewController:(UIViewController *)viewController {
@@ -146,9 +159,38 @@
     return [[self viewControllers] indexOfObject:searchedController];
 }
 
+- (RDVTabBar *)tabBar {
+    if (!_tabBar) {
+        _tabBar = [[RDVTabBar alloc] init];
+        [_tabBar setBackgroundColor:[UIColor blackColor]];
+        [_tabBar setDelegate:self];
+    }
+    return _tabBar;
+}
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        [_contentView setBackgroundColor:[UIColor yellowColor]];
+    }
+    return _contentView;
+}
+
 #pragma mark - RDVTabBarDelegate
 
 - (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {
+    if ([self selectedViewController] == [self viewControllers][index]) {
+        if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
+            
+            if ([selectedController topViewController] != [selectedController viewControllers][0]) {
+                [selectedController popViewControllerAnimated:YES];
+            }
+        }
+        
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -165,10 +207,22 @@
     [self setSelectedIndex:index];
     [self setSelectedViewController:[self viewControllers][index]];
     [self addChildViewController:[self selectedViewController]];
-    [[self view] addSubview:[[self selectedViewController] view]];
+    [[self contentView] addSubview:[[self selectedViewController] view]];
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
+    [[self selectedViewController] removeFromParentViewController];
+    [[[self selectedViewController] view] removeFromSuperview];
+    [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
+    [self addChildViewController:[self selectedViewController]];
+    [[self contentView] addSubview:[[self selectedViewController] view]];
 }
 
 @end
+
+#pragma mark - UIViewController+RDVTabBarControllerItem
 
 @implementation UIViewController (RDVTabBarControllerItem)
 

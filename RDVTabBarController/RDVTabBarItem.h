@@ -14,7 +14,6 @@
 - (UIImage *)finishedUnselectedImage;
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage;
 
-@property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) UIImage *image;
 
 - (void)changeSelected:(BOOL)selected;
