@@ -37,6 +37,5 @@
 @property id <RDVTabBarDelegate> delegate;
 @property (nonatomic, copy) NSArray *items;
 @property (nonatomic, weak) RDVTabBarItem *selectedItem;
-@property (nonatomic) CGFloat itemWidth;
 
 @end

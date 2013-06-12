@@ -8,13 +8,6 @@
 
 #import "RDVTabBarItem.h"
 
-@interface RDVTabBarItem ()
-
-@property (nonatomic) UIImage *selectedImage;
-@property (nonatomic) UIImage *unselectedImage;
-
-@end
-
 @implementation RDVTabBarItem
 
 - (id)initWithFrame:(CGRect)frame {
@@ -51,6 +44,26 @@
     }
 }
 
+- (UIImage *)backgroundSelectedImage {
+    return [self backgroundImageForState:UIControlStateHighlighted];
+}
+
+- (UIImage *)backgroundUnselectedImage {
+    return [self backgroundImageForState:UIControlStateNormal];
+}
+
+- (void)setBackgroundSelectedImage:(UIImage *)selectedImage withUnselectedImage:(UIImage *)unselectedImage {
+    if (selectedImage) {
+        [self setBackgroundImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
+        [self setBackgroundImage:selectedImage forState:UIControlStateSelected];
+        [self setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
+    }
+    
+    if (unselectedImage) {
+        [self setBackgroundImage:unselectedImage forState:UIControlStateNormal];
+    }
+}
+
 - (UIImage *)finishedSelectedImage {
     return [self imageForState:UIControlStateReserved];
 }
@@ -61,15 +74,13 @@
 
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage {
     if (selectedImage) {
-        [self setSelectedImage:selectedImage];
-        [self setBackgroundImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
-        [self setBackgroundImage:selectedImage forState:UIControlStateSelected];
-        [self setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
+        [self setImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
+        [self setImage:selectedImage forState:UIControlStateSelected];
+        [self setImage:selectedImage forState:UIControlStateHighlighted];
     }
     
     if (unselectedImage) {
-        [self setUnselectedImage:unselectedImage];
-        [self setBackgroundImage:unselectedImage forState:UIControlStateNormal];
+        [self setImage:unselectedImage forState:UIControlStateNormal];
     }
 }
 

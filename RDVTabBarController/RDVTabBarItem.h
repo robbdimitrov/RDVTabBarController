@@ -10,11 +10,13 @@
 
 @interface RDVTabBarItem : UIButton
 
+- (UIImage *)backgroundSelectedImage;
+- (UIImage *)backgroundUnselectedImage;
+- (void)setBackgroundSelectedImage:(UIImage *)selectedImage withUnselectedImage:(UIImage *)unselectedImage;
+
 - (UIImage *)finishedSelectedImage;
 - (UIImage *)finishedUnselectedImage;
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage;
-
-@property (nonatomic, strong) UIImage *image;
 
 - (void)changeSelected:(BOOL)selected;
 

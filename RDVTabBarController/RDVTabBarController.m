@@ -37,7 +37,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _tabBarHeight = 49;
-        _selectedIndex = 0;
     }
     return self;
 }
@@ -53,7 +52,7 @@
     
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [view setBackgroundColor:[UIColor blueColor]];
+    [view setBackgroundColor:[UIColor whiteColor]];
     
     [view addSubview:self.contentView];
     [view addSubview:self.tabBar];
@@ -77,10 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self setSelectedViewController:[self viewControllers][[self selectedIndex]]];
-    [self addChildViewController:[self selectedViewController]];
-    [[self contentView] addSubview:[[self selectedViewController] view]];
-    [[self tabBar] setSelectedItem:[[[self tabBar] items] objectAtIndex:[self selectedIndex]]];
+    [self setSelectedIndex:[self selectedIndex]];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -179,6 +175,12 @@
 #pragma mark - RDVTabBarDelegate
 
 - (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {
+    if ([[self delegate] respondsToSelector:@selector(tabBarController:shouldSelectViewController:)]) {
+        if (![[self delegate] tabBarController:self shouldSelectViewController:[self viewControllers][index]]) {
+            return NO;
+        }
+    }
+    
     if ([self selectedViewController] == [self viewControllers][index]) {
         if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
             UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
@@ -199,18 +201,19 @@
         return;
     }
     
+    [self setSelectedIndex:index];
+    
+    if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectViewController:)]) {
+        [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
+    }
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
     if ([self selectedViewController]) {
         [[[self selectedViewController] view] removeFromSuperview];
         [[self selectedViewController] removeFromParentViewController];
     }
     
-    [self setSelectedIndex:index];
-    [self setSelectedViewController:[self viewControllers][index]];
-    [self addChildViewController:[self selectedViewController]];
-    [[self contentView] addSubview:[[self selectedViewController] view]];
-}
-
-- (void)setSelectedIndex:(NSUInteger)selectedIndex {
     _selectedIndex = selectedIndex;
     [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
     [[self selectedViewController] removeFromParentViewController];

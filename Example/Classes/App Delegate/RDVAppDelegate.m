@@ -65,8 +65,9 @@
                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
     [tabBarController setTabBarHeight:63];
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
-        [item setFinishedSelectedImage:finishedImage withFinishedUnselectedImage:unfinishedImage];
-        [item setImage:[UIImage imageNamed:@"first"]];
+        [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
+        UIImage *image = [UIImage imageNamed:@"first"];
+        [item setFinishedSelectedImage:image withFinishedUnselectedImage:image];
     }
 }
 
