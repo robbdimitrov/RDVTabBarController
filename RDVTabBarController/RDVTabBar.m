@@ -25,7 +25,6 @@
 
 @interface RDVTabBar ()
 
-@property (nonatomic) CGFloat itemOffset;
 @property (nonatomic) CGFloat itemWidth;
 
 @end
@@ -33,14 +32,20 @@
 @implementation RDVTabBar
 
 - (void)layoutSubviews {
-    [self setItemWidth:CGRectGetWidth(self.frame) / [[self items] count]];
-    [self setItemOffset:CGRectGetWidth(self.frame) - [[self items] count] * [self itemWidth]];
+    if ([self itemOffset]) {
+        [self setItemWidth:(CGRectGetWidth(self.frame) - 2 * [self itemOffset]) / [[self items] count]];
+    } else {
+        [self setItemWidth:CGRectGetWidth(self.frame) / [[self items] count]];
+        [self setItemOffset:CGRectGetWidth(self.frame) - [[self items] count] * [self itemWidth]];
+    }
     
     for (NSInteger i = 0; i < [[self items] count]; i++) {
         RDVTabBarItem *item = [[self items] objectAtIndex:i];
         [item setFrame:CGRectMake(self.itemOffset + (i * self.itemWidth), 0, self.itemWidth, CGRectGetHeight(self.frame))];
     }
 }
+
+#pragma mark - Methods
 
 - (void)setItemWidth:(CGFloat)itemWidth {
     if (itemWidth > 0) {

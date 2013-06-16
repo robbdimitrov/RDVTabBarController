@@ -30,6 +30,8 @@
 		B46573401725A25100319236 /* RDVThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465733F1725A25100319236 /* RDVThirdViewController.m */; };
 		B49817A617229BB500AD294C /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A517229BB500AD294C /* RDVTabBar.m */; };
 		B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49817A817229CBC00AD294C /* RDVTabBarController.m */; };
+		B4A742CD176E1BF10055367E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B4A742CB176E1BF10055367E /* LICENSE */; };
+		B4A742CE176E1BF10055367E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B4A742CC176E1BF10055367E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		B49817A517229BB500AD294C /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		B49817A717229CBC00AD294C /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
 		B49817A817229CBC00AD294C /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
+		B4A742CB176E1BF10055367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B4A742CC176E1BF10055367E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 		B4616BA217228DF700863892 = {
 			isa = PBXGroup;
 			children = (
+				B4A742CB176E1BF10055367E /* LICENSE */,
+				B4A742CC176E1BF10055367E /* README.md */,
 				B4616BB417228DF700863892 /* RDVTabBarController */,
 				B4616BF4172298E100863892 /* Example */,
 				B4616BAD17228DF700863892 /* Frameworks */,
@@ -257,6 +263,8 @@
 				B435F54B173981FE00297C82 /* tabbar_selected_background@2x.png in Resources */,
 				B435F54C173981FE00297C82 /* tabbar_unselected_background.png in Resources */,
 				B435F54D173981FE00297C82 /* tabbar_unselected_background@2x.png in Resources */,
+				B4A742CD176E1BF10055367E /* LICENSE in Resources */,
+				B4A742CE176E1BF10055367E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

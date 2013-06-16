@@ -63,7 +63,11 @@
                               resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
     UIImage *unfinishedImage = [[UIImage imageNamed:@"tabbar_unselected_background"]
                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
-    [tabBarController setTabBarHeight:63];
+    
+    RDVTabBar *tabBar = [tabBarController tabBar];
+    
+    [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 63)];
+    [tabBar setItemOffset:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 100 : 0)];
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
         UIImage *image = [UIImage imageNamed:@"first"];

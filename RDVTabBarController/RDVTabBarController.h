@@ -33,7 +33,6 @@
 @property (nonatomic, weak) UIViewController *selectedViewController;
 @property (nonatomic, readonly) UIView *contentView;
 @property (nonatomic) NSUInteger selectedIndex;
-@property (nonatomic) CGFloat tabBarHeight;
 
 @end
 

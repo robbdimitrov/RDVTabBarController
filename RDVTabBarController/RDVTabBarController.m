@@ -32,19 +32,6 @@
 
 @implementation RDVTabBarController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _tabBarHeight = 49;
-    }
-    return self;
-}
-
-- (id)init {
-    return [self initWithNibName:nil bundle:nil];
-}
-
 #pragma mark - View lifecycle
 
 - (void)loadView {
@@ -62,6 +49,10 @@
 
 - (void)viewWillLayoutSubviews {
     CGSize viewSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    CGFloat tabBarHeight = CGRectGetHeight([[self tabBar] frame]);
+    if (!tabBarHeight) {
+        tabBarHeight = 49;
+    }
     
     if (!self.parentViewController) {
         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
@@ -69,8 +60,8 @@
         }
     }
     
-    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height - self.tabBarHeight)];
-    [self.tabBar setFrame:CGRectMake(0, viewSize.height - self.tabBarHeight, viewSize.width, self.tabBarHeight)];
+    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height - tabBarHeight)];
+    [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -158,7 +149,7 @@
 - (RDVTabBar *)tabBar {
     if (!_tabBar) {
         _tabBar = [[RDVTabBar alloc] init];
-        [_tabBar setBackgroundColor:[UIColor blackColor]];
+        [_tabBar setBackgroundColor:[UIColor lightGrayColor]];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -167,7 +158,7 @@
 - (UIView *)contentView {
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
-        [_contentView setBackgroundColor:[UIColor yellowColor]];
+        [_contentView setBackgroundColor:[UIColor whiteColor]];
     }
     return _contentView;
 }
@@ -242,8 +233,19 @@
     return [[[tabBarController tabBar] items] objectAtIndex:index];
 }
 
-- (void)rdv_setTabBarItem:(RDVTabBarItem *)rdv_tabBarItem {
+- (void)rdv_setTabBarItem:(RDVTabBarItem *)tabBarItem {
+    RDVTabBarController *tabBarController = [self rdv_tabBarController];
     
+    if (!tabBarController) {
+        return;
+    }
+    
+    RDVTabBar *tabBar = [tabBarController tabBar];
+    NSInteger index = [tabBarController indexForViewController:self];
+    
+    NSMutableArray *tabBarItems = [[NSMutableArray alloc] initWithArray:[tabBar items]];
+    [tabBarItems replaceObjectAtIndex:index withObject:tabBarItem];
+    [tabBar setItems:tabBarItems];
 }
 
 @end
