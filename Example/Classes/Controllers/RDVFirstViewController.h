@@ -24,6 +24,4 @@
 
 @interface RDVFirstViewController : UIViewController
 
-@property (nonatomic, strong) UILabel *titleLabel;
-
 @end

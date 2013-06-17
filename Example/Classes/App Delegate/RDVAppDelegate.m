@@ -67,7 +67,6 @@
     RDVTabBar *tabBar = [tabBarController tabBar];
     
     [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 63)];
-    [tabBar setItemOffset:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 100 : 0)];
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
         UIImage *image = [UIImage imageNamed:@"first"];

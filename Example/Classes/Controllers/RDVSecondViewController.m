@@ -44,14 +44,7 @@
     
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [view setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
-    
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, applicationFrame.size.height / - 40 / 2,
-                                                                applicationFrame.size.width - 2 * 20, 40)];
-    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:26]];
-    [self.titleLabel setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
-    [self.titleLabel setText:self.title];
-    [view addSubview:self.titleLabel];
+    [view setBackgroundColor:[UIColor greenColor]];
     
     self.view = view;
 }

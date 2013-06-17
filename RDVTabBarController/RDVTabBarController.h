@@ -31,7 +31,6 @@
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, readonly) RDVTabBar *tabBar;
 @property (nonatomic, weak) UIViewController *selectedViewController;
-@property (nonatomic, readonly) UIView *contentView;
 @property (nonatomic) NSUInteger selectedIndex;
 
 @end

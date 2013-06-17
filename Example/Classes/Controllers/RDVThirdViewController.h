@@ -24,6 +24,4 @@
 
 @interface RDVThirdViewController : UIViewController
 
-@property (nonatomic, strong) UILabel *titleLabel;
-
 @end

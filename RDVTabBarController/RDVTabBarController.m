@@ -200,18 +200,20 @@
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
+    
     if ([self selectedViewController]) {
+        [[self selectedViewController] willMoveToParentViewController:nil];
         [[[self selectedViewController] view] removeFromSuperview];
         [[self selectedViewController] removeFromParentViewController];
     }
     
-    _selectedIndex = selectedIndex;
-    [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
-    [[self selectedViewController] removeFromParentViewController];
-    [[[self selectedViewController] view] removeFromSuperview];
     [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
     [self addChildViewController:[self selectedViewController]];
+    [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
+    [[self selectedViewController] didMoveToParentViewController:self];
 }
 
 @end

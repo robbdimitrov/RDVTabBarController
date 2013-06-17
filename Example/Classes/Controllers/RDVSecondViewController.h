@@ -24,6 +24,4 @@
 
 @interface RDVSecondViewController : UIViewController
 
-@property (nonatomic, strong) UILabel *titleLabel;
-
 @end
