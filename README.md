@@ -2,8 +2,8 @@
 
 RDVTabbarController can be used inside UINavigationController and is highly customizable.
 
-![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/iPhone.png).
-![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/iPad.png).
+![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/Screenshots/iPhone.png)
+![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/Screenshots/iPad.png)
 
 * UIButton tabBarItems
 * Supports iPad and iPhone
