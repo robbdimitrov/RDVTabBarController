@@ -39,8 +39,8 @@
 @property (nonatomic, weak) RDVTabBarItem *selectedItem;
 
 /*
- * itemOffsed can be used to center the items in the middle of tha tabBar
+ * edgeContentInset can be used to center the items in the middle of tha tabBar
  */
-@property (nonatomic) CGFloat itemOffset;
+@property (nonatomic) CGFloat edgeContentInset;
 
 @end

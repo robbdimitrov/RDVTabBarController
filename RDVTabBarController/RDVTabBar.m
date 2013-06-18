@@ -32,16 +32,16 @@
 @implementation RDVTabBar
 
 - (void)layoutSubviews {
-    if ([self itemOffset]) {
-        [self setItemWidth:(CGRectGetWidth(self.frame) - 2 * [self itemOffset]) / [[self items] count]];
+    if ([self edgeContentInset]) {
+        [self setItemWidth:(CGRectGetWidth(self.frame) - 2 * [self edgeContentInset]) / [[self items] count]];
     } else {
         [self setItemWidth:CGRectGetWidth(self.frame) / [[self items] count]];
-        [self setItemOffset:CGRectGetWidth(self.frame) - [[self items] count] * [self itemWidth]];
+        [self setEdgeContentInset:CGRectGetWidth(self.frame) - [[self items] count] * [self itemWidth]];
     }
     
     for (NSInteger i = 0; i < [[self items] count]; i++) {
         RDVTabBarItem *item = [[self items] objectAtIndex:i];
-        [item setFrame:CGRectMake(self.itemOffset + (i * self.itemWidth), 0, self.itemWidth, CGRectGetHeight(self.frame))];
+        [item setFrame:CGRectMake(self.edgeContentInset + (i * self.itemWidth), 0, self.itemWidth, CGRectGetHeight(self.frame))];
     }
 }
 
@@ -73,10 +73,7 @@
         }
     }
     
-    [[self selectedItem] changeSelected:NO];
-    
     [self setSelectedItem:sender];
-    [(RDVTabBarItem *)sender changeSelected:YES];
     
     if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {
         NSInteger index = [self.items indexOfObject:self.selectedItem];
@@ -88,10 +85,10 @@
     if (selectedItem == _selectedItem) {
         return;
     }
-    [_selectedItem changeSelected:NO];
+    [_selectedItem setSelected:NO];
     
     _selectedItem = selectedItem;
-    [_selectedItem changeSelected:YES];
+    [_selectedItem setSelected:YES];
 }
 
 @end

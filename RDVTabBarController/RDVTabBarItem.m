@@ -14,9 +14,18 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [self.titleLabel setMinimumFontSize:8];
+        UILabel *titleLabel = [self titleLabel];
+        if ([titleLabel respondsToSelector:@selector(minimumScaleFactor)]) {
+            [titleLabel setMinimumScaleFactor:8];
+        } else {
+            [titleLabel setMinimumFontSize:8];
+        }
     }
     return self;
+}
+
+- (id)init {
+    return [self initWithFrame:CGRectZero];
 }
 
 - (void)layoutSubviews {
@@ -44,8 +53,10 @@
     }
 }
 
+#pragma mark - Methods
+
 - (UIImage *)backgroundSelectedImage {
-    return [self backgroundImageForState:UIControlStateHighlighted];
+    return [self backgroundImageForState:UIControlStateSelected];
 }
 
 - (UIImage *)backgroundUnselectedImage {
@@ -56,7 +67,6 @@
     if (selectedImage) {
         [self setBackgroundImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
         [self setBackgroundImage:selectedImage forState:UIControlStateSelected];
-        [self setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
     }
     
     if (unselectedImage) {
@@ -65,7 +75,7 @@
 }
 
 - (UIImage *)finishedSelectedImage {
-    return [self imageForState:UIControlStateReserved];
+    return [self imageForState:UIControlStateSelected];
 }
 
 - (UIImage *)finishedUnselectedImage {
@@ -76,27 +86,11 @@
     if (selectedImage) {
         [self setImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
         [self setImage:selectedImage forState:UIControlStateSelected];
-        [self setImage:selectedImage forState:UIControlStateHighlighted];
     }
     
     if (unselectedImage) {
         [self setImage:unselectedImage forState:UIControlStateNormal];
     }
-}
-
-- (void)setImage:(UIImage *)image {
-    [self setImage:image forState:UIControlStateNormal];
-    [self setImage:image forState:UIControlStateSelected|UIControlStateHighlighted];
-    [self setImage:image forState:UIControlStateSelected];
-    [self setImage:image forState:UIControlStateHighlighted];
-}
-
-- (UIImage *)image {
-    return [self imageForState:UIControlStateNormal];
-}
-
-- (void)changeSelected:(BOOL)selected {
-    [self setSelected:selected];
 }
 
 @end

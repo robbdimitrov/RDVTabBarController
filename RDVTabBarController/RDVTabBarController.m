@@ -120,6 +120,23 @@
     return [[self viewControllers] objectAtIndex:[self selectedIndex]];
 }
 
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
+    
+    if ([self selectedViewController]) {
+        [[self selectedViewController] willMoveToParentViewController:nil];
+        [[[self selectedViewController] view] removeFromSuperview];
+        [[self selectedViewController] removeFromParentViewController];
+    }
+    
+    [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
+    [self addChildViewController:[self selectedViewController]];
+    [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
+    [[self contentView] addSubview:[[self selectedViewController] view]];
+    [[self selectedViewController] didMoveToParentViewController:self];
+}
+
 - (void)setViewControllers:(NSArray *)viewControllers {
     if (viewControllers && [viewControllers isKindOfClass:[NSArray class]]) {
         _viewControllers = [viewControllers copy];
@@ -197,23 +214,6 @@
     if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectViewController:)]) {
         [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
     }
-}
-
-- (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    _selectedIndex = selectedIndex;
-    [[self tabBar] setSelectedItem:[[self tabBar] items][selectedIndex]];
-    
-    if ([self selectedViewController]) {
-        [[self selectedViewController] willMoveToParentViewController:nil];
-        [[[self selectedViewController] view] removeFromSuperview];
-        [[self selectedViewController] removeFromParentViewController];
-    }
-    
-    [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
-    [self addChildViewController:[self selectedViewController]];
-    [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
-    [[self contentView] addSubview:[[self selectedViewController] view]];
-    [[self selectedViewController] didMoveToParentViewController:self];
 }
 
 @end

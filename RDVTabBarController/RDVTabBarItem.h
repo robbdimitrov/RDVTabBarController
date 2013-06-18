@@ -18,6 +18,4 @@
 - (UIImage *)finishedUnselectedImage;
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage;
 
-- (void)changeSelected:(BOOL)selected;
-
 @end
