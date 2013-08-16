@@ -22,6 +22,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RDVThirdViewController : UIViewController
+@interface RDVThirdViewController : UITableViewController
 
 @end

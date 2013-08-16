@@ -22,6 +22,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RDVSecondViewController : UIViewController
+@interface RDVSecondViewController : UITableViewController
 
 @end

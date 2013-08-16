@@ -31,25 +31,23 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if ([[[self titleLabel] text] length]) {
-        CGFloat width = CGRectGetWidth(self.frame);
-        CGFloat height = CGRectGetHeight(self.frame);
-        CGFloat imageWidth = CGRectGetWidth(self.imageView.frame);
-        CGFloat imageHeight = CGRectGetHeight(self.imageView.frame);
+    CGFloat width = CGRectGetWidth(self.frame);
+    CGFloat height = CGRectGetHeight(self.frame);
+    CGFloat imageWidth = CGRectGetWidth(self.imageView.frame);
+    CGFloat imageHeight = CGRectGetHeight(self.imageView.frame);
+    
+    if (![[[self titleLabel] text] length]) {
+        [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), roundf(height / 2 - imageHeight / 2),
+                                              imageWidth, imageHeight)];
+        [[self titleLabel] setFrame:CGRectZero];
+    } else {
+        CGSize titleSize = [[self titleLabel] sizeThatFits:CGSizeMake(width, 20)];
+        CGFloat imageStartingY = roundf((height - imageHeight - titleSize.height) / 2);
         
-        if (![[[self titleLabel] text] length]) {
-            [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), roundf(height / 2 - imageHeight / 2),
-                                                  imageWidth, imageHeight)];
-            [[self titleLabel] setFrame:CGRectZero];
-        } else {
-            CGSize titleSize = [[self titleLabel] sizeThatFits:CGSizeMake(width, 20)];
-            CGFloat imageStartingY = roundf((height - imageHeight - titleSize.height) / 2);
-            
-            [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), imageStartingY,
-                                                  imageWidth, imageHeight)];
-            [[self titleLabel] setFrame:CGRectMake(roundf(width / 2 - titleSize.width / 2),
-                                                   CGRectGetMaxY(self.imageView.frame), titleSize.width, titleSize.height)];
-        }
+        [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), imageStartingY,
+                                              imageWidth, imageHeight)];
+        [[self titleLabel] setFrame:CGRectMake(roundf(width / 2 - titleSize.width / 2),
+                                               CGRectGetMaxY(self.imageView.frame), titleSize.width, titleSize.height)];
     }
 }
 

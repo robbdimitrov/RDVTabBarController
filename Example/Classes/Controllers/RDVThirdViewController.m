@@ -39,16 +39,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)loadView {
-    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
-    
-    UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
-    [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [view setBackgroundColor:[UIColor blueColor]];
-    
-    self.view = view;
-}
-
 - (NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         return UIInterfaceOrientationMaskAll;
@@ -62,6 +52,34 @@
         return YES;
     }
     return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
+#pragma mark - Methods
+
+- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+    [[cell textLabel] setText:[NSString stringWithFormat:@"Cell (%d, %d)", indexPath.section, indexPath.row]];
+}
+
+#pragma mark - Table view
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    [self configureCell:cell forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
