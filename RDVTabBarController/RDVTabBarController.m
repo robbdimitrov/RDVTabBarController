@@ -60,7 +60,7 @@
         }
     }
     
-    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height - tabBarHeight)];
+    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height - [self  minimumTabBarContentHeight])];
     [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
 }
 
@@ -166,7 +166,7 @@
 - (RDVTabBar *)tabBar {
     if (!_tabBar) {
         _tabBar = [[RDVTabBar alloc] init];
-        [_tabBar setBackgroundColor:[UIColor lightGrayColor]];
+        [_tabBar setBackgroundColor:[UIColor clearColor]];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -178,6 +178,19 @@
         [_contentView setBackgroundColor:[UIColor whiteColor]];
     }
     return _contentView;
+}
+
+- (CGFloat)minimumTabBarContentHeight {
+    CGFloat minimumTabBarContentHeight = CGRectGetHeight([self tabBar].frame);
+    
+    for (RDVTabBarItem *item in [[self tabBar] items]) {
+        CGFloat itemHeight = [item itemHeight];
+        if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
+            minimumTabBarContentHeight = itemHeight;
+        }
+    }
+    
+    return minimumTabBarContentHeight;
 }
 
 #pragma mark - RDVTabBarDelegate

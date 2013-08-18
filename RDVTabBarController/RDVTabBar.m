@@ -32,16 +32,26 @@
 @implementation RDVTabBar
 
 - (void)layoutSubviews {
+    CGSize frameSize = self.frame.size;
+    
     if ([self edgeContentInset]) {
-        [self setItemWidth:(CGRectGetWidth(self.frame) - 2 * [self edgeContentInset]) / [[self items] count]];
+        [self setItemWidth:(frameSize.width - 2 * [self edgeContentInset]) / [[self items] count]];
     } else {
-        [self setItemWidth:CGRectGetWidth(self.frame) / [[self items] count]];
-        [self setEdgeContentInset:CGRectGetWidth(self.frame) - [[self items] count] * [self itemWidth]];
+        [self setItemWidth:frameSize.width / [[self items] count]];
+        [self setEdgeContentInset:frameSize.width - [[self items] count] * [self itemWidth]];
     }
     
     for (NSInteger i = 0; i < [[self items] count]; i++) {
         RDVTabBarItem *item = [[self items] objectAtIndex:i];
-        [item setFrame:CGRectMake(self.edgeContentInset + (i * self.itemWidth), 0, self.itemWidth, CGRectGetHeight(self.frame))];
+        
+        CGFloat itemHeight = [item itemHeight];
+        
+        if (!itemHeight) {
+            itemHeight = frameSize.height;
+        }
+        
+        [item setFrame:CGRectMake(self.edgeContentInset + (i * self.itemWidth), roundf(frameSize.height - itemHeight),
+                                  self.itemWidth, itemHeight)];
     }
 }
 

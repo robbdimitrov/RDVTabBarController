@@ -18,4 +18,9 @@
 - (UIImage *)finishedUnselectedImage;
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage;
 
+/**
+ * itemHeight is an optional parameter. When set it is used instead of tabBar's height
+ */
+@property CGFloat itemHeight;
+
 @end
