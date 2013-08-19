@@ -71,12 +71,6 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return UIInterfaceOrientationMaskAll;
-    } else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-    
     UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskAll;
     for (UIViewController *viewCotroller in [self viewControllers]) {
         if (![viewCotroller respondsToSelector:@selector(supportedInterfaceOrientations)]) {
@@ -145,7 +139,7 @@
         
         for (UIViewController *viewController in viewControllers) {
             RDVTabBarItem *tabBarItem = [[RDVTabBarItem alloc] init];
-            [tabBarItem setTitle:viewController.title forState:UIControlStateNormal];
+            [tabBarItem setTitle:viewController.title];
             [tabBarItems addObject:tabBarItem];
         }
         

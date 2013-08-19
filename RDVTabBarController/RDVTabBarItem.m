@@ -8,18 +8,35 @@
 
 #import "RDVTabBarItem.h"
 
+@interface RDVTabBarItem () {
+    NSString *_title;
+    UIOffset _titlePositionAdjustment;
+    NSDictionary *_unselectedTitleAttributes;
+    NSDictionary *_selectedTitleAttributes;
+}
+
+@property UIImage *unselectedBackgroundImage;
+@property UIImage *selectedBackgroundImage;
+@property UIImage *unselectedImage;
+@property UIImage *selectedImage;
+
+@end
+
 @implementation RDVTabBarItem
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        UILabel *titleLabel = [self titleLabel];
-        if ([titleLabel respondsToSelector:@selector(minimumScaleFactor)]) {
-            [titleLabel setMinimumScaleFactor:8];
-        } else {
-            [titleLabel setMinimumFontSize:8];
-        }
+        _title = @"";
+        _titlePositionAdjustment = UIOffsetZero;
+        
+        _unselectedTitleAttributes = @{UITextAttributeFont: [UIFont systemFontOfSize:12],
+                                       UITextAttributeTextColor: [UIColor whiteColor],
+                                       UITextAttributeTextShadowColor: [UIColor whiteColor],
+                                       UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
+                                       };
+        
+        _selectedTitleAttributes = [_unselectedTitleAttributes copy];
     }
     return self;
 }
@@ -28,66 +45,149 @@
     return [self initWithFrame:CGRectZero];
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)drawRect:(CGRect)rect {
+    CGSize frameSize = self.frame.size;
+    CGSize imageSize = CGSizeZero;
+    NSDictionary *titleAttributes = nil;
+    UIImage *backgroundImage = nil;
+    UIImage *image = nil;
     
-    CGFloat width = CGRectGetWidth(self.frame);
-    CGFloat height = CGRectGetHeight(self.frame);
-    CGFloat imageWidth = CGRectGetWidth(self.imageView.frame);
-    CGFloat imageHeight = CGRectGetHeight(self.imageView.frame);
-    
-    if (![[[self titleLabel] text] length]) {
-        [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), roundf(height / 2 - imageHeight / 2),
-                                              imageWidth, imageHeight)];
-        [[self titleLabel] setFrame:CGRectZero];
+    if ([self isSelected]) {
+        image = [self selectedImage];
+        backgroundImage = [self selectedBackgroundImage];
+        titleAttributes = [self selectedTitleAttributes];
     } else {
-        CGSize titleSize = [[self titleLabel] sizeThatFits:CGSizeMake(width, 20)];
-        CGFloat imageStartingY = roundf((height - imageHeight - titleSize.height) / 2);
+        image = [self unselectedImage];
+        backgroundImage = [self unselectedBackgroundImage];
+        titleAttributes = [self unselectedTitleAttributes];
+    }
+    
+    imageSize = [image size];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    if (backgroundImage.size.width < frameSize.width) {
+        [backgroundImage drawAsPatternInRect:self.bounds];
+    } else {
+        [backgroundImage drawInRect:self.bounds];
+    }
+    
+    if (![_title length]) {
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2),
+                                     roundf(frameSize.height / 2 - imageSize.height / 2),
+                                     imageSize.width, imageSize.height)];
+    } else {
+        CGSize titleSize = [_title sizeWithFont:[UIFont systemFontOfSize:12]
+                              constrainedToSize:CGSizeMake(frameSize.width, 20)];
+        UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
+        CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
         
-        [[self imageView] setFrame:CGRectMake(roundf(width / 2 - imageWidth / 2), imageStartingY,
-                                              imageWidth, imageHeight)];
-        [[self titleLabel] setFrame:CGRectMake(roundf(width / 2 - titleSize.width / 2),
-                                               CGRectGetMaxY(self.imageView.frame), titleSize.width, titleSize.height)];
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2), imageStartingY,
+                                     imageSize.width, imageSize.height)];
+        
+        CGContextSetFillColorWithColor(context, [titleAttributes[UITextAttributeTextColor] CGColor]);
+        CGContextSetShadowWithColor(context, CGSizeMake(titleShadowOffset.horizontal, titleShadowOffset.vertical),
+                                    1.0, [titleAttributes[UITextAttributeTextShadowColor] CGColor]);
+        
+        [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
+                                      _titlePositionAdjustment.horizontal,
+                                      imageStartingY + imageSize.height + _titlePositionAdjustment.vertical,
+                                      titleSize.width, titleSize.height)
+                  withFont:titleAttributes[UITextAttributeFont]
+             lineBreakMode:NSLineBreakByTruncatingTail];
+    }
+    
+    CGContextRestoreGState(context);
+}
+
+#pragma mark - Title
+
+- (NSString *)title {
+    @synchronized(_title) {
+        return _title;
     }
 }
 
-#pragma mark - Methods
+- (void)setTitle:(NSString *)title {
+    @synchronized(_title) {
+        if (title && ![_title isEqualToString:title]) {
+            _title = [title copy];
+        }
+    }
+}
+
+- (UIOffset)titlePositionAdjustment {
+    return _titlePositionAdjustment;
+}
+
+- (void)setTitlePositionAdjustment:(UIOffset)adjustment {
+    _titlePositionAdjustment = adjustment;
+}
+
+- (NSDictionary *)unselectedTitleAttributes {
+    @synchronized(_unselectedTitleAttributes) {
+        return _unselectedTitleAttributes;
+    }
+}
+
+- (void)setunselectedTitleAttributes:(NSDictionary *)attributes {
+    @synchronized(_unselectedTitleAttributes) {
+        if (attributes && [_unselectedTitleAttributes isEqual:attributes]) {
+            _unselectedTitleAttributes = [attributes copy];
+        }
+    }
+}
+
+- (NSDictionary *)selectedTitleAttributes {
+    @synchronized(_selectedTitleAttributes) {
+        return _selectedTitleAttributes;
+    }
+}
+
+- (void)selectedTitleAttributes:(NSDictionary *)attributes {
+    @synchronized(_selectedTitleAttributes) {
+        if (attributes && [_selectedTitleAttributes isEqual:attributes]) {
+            _selectedTitleAttributes = [attributes copy];
+        }
+    }
+}
+
+#pragma mark - Images
 
 - (UIImage *)backgroundSelectedImage {
-    return [self backgroundImageForState:UIControlStateSelected];
+    return [self selectedBackgroundImage];
 }
 
 - (UIImage *)backgroundUnselectedImage {
-    return [self backgroundImageForState:UIControlStateNormal];
+    return [self unselectedBackgroundImage];
 }
 
 - (void)setBackgroundSelectedImage:(UIImage *)selectedImage withUnselectedImage:(UIImage *)unselectedImage {
-    if (selectedImage) {
-        [self setBackgroundImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
-        [self setBackgroundImage:selectedImage forState:UIControlStateSelected];
+    if (selectedImage && (selectedImage != [self selectedBackgroundImage])) {
+        [self setSelectedBackgroundImage:selectedImage];
     }
     
-    if (unselectedImage) {
-        [self setBackgroundImage:unselectedImage forState:UIControlStateNormal];
+    if (unselectedImage && (unselectedImage != [self unselectedBackgroundImage])) {
+        [self setUnselectedBackgroundImage:unselectedImage];
     }
 }
 
 - (UIImage *)finishedSelectedImage {
-    return [self imageForState:UIControlStateSelected];
+    return [self selectedImage];
 }
 
 - (UIImage *)finishedUnselectedImage {
-    return [self imageForState:UIControlStateNormal];
+    return [self unselectedImage];
 }
 
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage {
-    if (selectedImage) {
-        [self setImage:selectedImage forState:UIControlStateSelected|UIControlStateHighlighted];
-        [self setImage:selectedImage forState:UIControlStateSelected];
+    if (selectedImage && (selectedImage != [self selectedImage])) {
+        [self setSelectedImage:selectedImage];
     }
     
-    if (unselectedImage) {
-        [self setImage:unselectedImage forState:UIControlStateNormal];
+    if (unselectedImage && (unselectedImage != [self unselectedImage])) {
+        [self setUnselectedImage:unselectedImage];
     }
 }
 

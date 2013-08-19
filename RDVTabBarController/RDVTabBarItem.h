@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RDVTabBarItem : UIButton
+@interface RDVTabBarItem : UIControl
+
+- (NSString *)title;
+- (void)setTitle:(NSString *)title;
+
+- (UIOffset)titlePositionAdjustment;
+- (void)setTitlePositionAdjustment:(UIOffset)adjustment;
+
+- (NSDictionary *)unselectedTitleAttributes;
+- (void)setunselectedTitleAttributes:(NSDictionary *)attributes;
+
+- (NSDictionary *)selectedTitleAttributes;
+- (void)selectedTitleAttributes:(NSDictionary *)attributes;
 
 - (UIImage *)backgroundSelectedImage;
 - (UIImage *)backgroundUnselectedImage;
