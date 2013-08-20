@@ -35,8 +35,6 @@
                                        UITextAttributeTextShadowColor: [UIColor whiteColor],
                                        UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
                                        };
-        
-        _selectedTitleAttributes = [_unselectedTitleAttributes copy];
     }
     return self;
 }
@@ -56,6 +54,10 @@
         image = [self selectedImage];
         backgroundImage = [self selectedBackgroundImage];
         titleAttributes = [self selectedTitleAttributes];
+        
+        if (!titleAttributes) {
+            titleAttributes = [self unselectedTitleAttributes];
+        }
     } else {
         image = [self unselectedImage];
         backgroundImage = [self unselectedBackgroundImage];
@@ -131,7 +133,7 @@
     }
 }
 
-- (void)setunselectedTitleAttributes:(NSDictionary *)attributes {
+- (void)setUnselectedTitleAttributes:(NSDictionary *)attributes {
     @synchronized(_unselectedTitleAttributes) {
         if (attributes && [_unselectedTitleAttributes isEqual:attributes]) {
             _unselectedTitleAttributes = [attributes copy];
@@ -145,7 +147,7 @@
     }
 }
 
-- (void)selectedTitleAttributes:(NSDictionary *)attributes {
+- (void)setSelectedTitleAttributes:(NSDictionary *)attributes {
     @synchronized(_selectedTitleAttributes) {
         if (attributes && [_selectedTitleAttributes isEqual:attributes]) {
             _selectedTitleAttributes = [attributes copy];

@@ -26,16 +26,35 @@
 @interface RDVTabBar ()
 
 @property (nonatomic) CGFloat itemWidth;
+@property (nonatomic) UIView *backgroundView;
 
 @end
 
 @implementation RDVTabBar
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _backgroundView = [[UIView alloc] initWithFrame:frame];
+        [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
+        [self addSubview:_backgroundView];
+    }
+    return self;
+}
+
+- (id)init {
+    return [self initWithFrame:CGRectZero];
+}
+
 - (void)layoutSubviews {
     CGSize frameSize = self.frame.size;
+    CGFloat minimumContentHeight = [self minimumContentHeight];
     
-    [self setItemWidth:roundf((frameSize.width - [self edgeContentInsets].left -
-                               [self edgeContentInsets].right) / [[self items] count])];
+    [[self backgroundView] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
+                                            frameSize.width, frameSize.height)];
+    
+    [self setItemWidth:roundf((frameSize.width - [self contentEdgeInsets].left -
+                               [self contentEdgeInsets].right) / [[self items] count])];
     
     NSInteger index = 0;
     
@@ -46,9 +65,9 @@
             itemHeight = frameSize.height;
         }
         
-        [item setFrame:CGRectMake(self.edgeContentInsets.left + (index * self.itemWidth),
-                                  roundf(frameSize.height - itemHeight) - self.edgeContentInsets.top,
-                                  self.itemWidth, itemHeight - self.edgeContentInsets.bottom)];
+        [item setFrame:CGRectMake(self.contentEdgeInsets.left + (index * self.itemWidth),
+                                  roundf(frameSize.height - itemHeight) - self.contentEdgeInsets.top,
+                                  self.itemWidth, itemHeight - self.contentEdgeInsets.bottom)];
         [item setNeedsDisplay];
         
         index++;
@@ -99,6 +118,19 @@
     
     _selectedItem = selectedItem;
     [_selectedItem setSelected:YES];
+}
+
+- (CGFloat)minimumContentHeight {
+    CGFloat minimumTabBarContentHeight = CGRectGetHeight([self frame]);
+    
+    for (RDVTabBarItem *item in [self items]) {
+        CGFloat itemHeight = [item itemHeight];
+        if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
+            minimumTabBarContentHeight = itemHeight;
+        }
+    }
+    
+    return minimumTabBarContentHeight;
 }
 
 @end

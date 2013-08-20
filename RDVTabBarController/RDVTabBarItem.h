@@ -16,11 +16,14 @@
 - (UIOffset)titlePositionAdjustment;
 - (void)setTitlePositionAdjustment:(UIOffset)adjustment;
 
+/**
+ * For title's text attributes see
+ * https://developer.apple.com/library/ios/documentation/uikit/reference/NSString_UIKit_Additions/Reference/Reference.html
+ */
 - (NSDictionary *)unselectedTitleAttributes;
-- (void)setunselectedTitleAttributes:(NSDictionary *)attributes;
-
+- (void)setUnselectedTitleAttributes:(NSDictionary *)attributes;
 - (NSDictionary *)selectedTitleAttributes;
-- (void)selectedTitleAttributes:(NSDictionary *)attributes;
+- (void)setSelectedTitleAttributes:(NSDictionary *)attributes;
 
 - (UIImage *)backgroundSelectedImage;
 - (UIImage *)backgroundUnselectedImage;
@@ -31,7 +34,7 @@
 - (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage;
 
 /**
- * itemHeight is an optional parameter. When set it is used instead of tabBar's height
+ * itemHeight is an optional property. When set it is used instead of tabBar's height
  */
 @property CGFloat itemHeight;
 

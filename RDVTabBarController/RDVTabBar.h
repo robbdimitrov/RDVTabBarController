@@ -38,9 +38,22 @@
 @property (nonatomic, copy) NSArray *items;
 @property (nonatomic, weak) RDVTabBarItem *selectedItem;
 
-/*
- * edgeContentInsets can be used to center the items in the middle of the tabBar
+/**
+ * backgroundView stays behind tabBar's items. If you want to add additional views, 
+ * add them as subviews of backgroundView
  */
-@property (nonatomic) UIEdgeInsets edgeContentInsets;
+@property (readonly) UIView *backgroundView;
+
+/*
+ * contentEdgeInsets can be used to center the items in the middle of the tabBar
+ */
+@property (nonatomic) UIEdgeInsets contentEdgeInsets;
+
+/**
+ * Calculates the minimum content height
+ *
+ * @return Minimum height of RDVTabBar's items
+ */
+- (CGFloat)minimumContentHeight;
 
 @end
