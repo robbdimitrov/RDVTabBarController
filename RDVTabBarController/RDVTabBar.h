@@ -42,17 +42,15 @@
  * backgroundView stays behind tabBar's items. If you want to add additional views, 
  * add them as subviews of backgroundView
  */
-@property (readonly) UIView *backgroundView;
+@property (nonatomic, readonly) UIView *backgroundView;
 
 /*
  * contentEdgeInsets can be used to center the items in the middle of the tabBar
  */
-@property (nonatomic) UIEdgeInsets contentEdgeInsets;
+@property UIEdgeInsets contentEdgeInsets;
 
 /**
- * Calculates the minimum content height
- *
- * @return Minimum height of RDVTabBar's items
+ * minimumContentHeight returns the minimum height of RDVTabBar's items
  */
 - (CGFloat)minimumContentHeight;
 

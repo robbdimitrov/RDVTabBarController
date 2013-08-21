@@ -60,9 +60,9 @@
 
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
     UIImage *finishedImage = [[UIImage imageNamed:@"tabbar_selected_background"]
-                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     UIImage *unfinishedImage = [[UIImage imageNamed:@"tabbar_unselected_background"]
-                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 0)];
+                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     RDVTabBar *tabBar = [tabBarController tabBar];
     

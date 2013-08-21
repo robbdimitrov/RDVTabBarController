@@ -45,7 +45,7 @@
 
 @interface UIViewController (RDVTabBarControllerItem)
 
-@property(nonatomic, strong, setter = rdv_setTabBarItem:) RDVTabBarItem *rdv_tabBarItem;
-@property(nonatomic, readonly, strong) RDVTabBarController *rdv_tabBarController;
+@property(nonatomic, setter = rdv_setTabBarItem:) RDVTabBarItem *rdv_tabBarItem;
+@property(nonatomic, readonly) RDVTabBarController *rdv_tabBarController;
 
 @end

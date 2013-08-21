@@ -1,16 +1,31 @@
+// RDVTabBarItem.h
 //
-//  RDVTabBarItem.m
-//  RDVTabBarController
+// Copyright (c) 2013 Robert Dimitrov
 //
-//  Created by Robert Dimitrov on 5/7/13.
-//  Copyright (c) 2013 Robert Dimitrov. All rights reserved.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "RDVTabBarItem.h"
 
 @interface RDVTabBarItem () {
     NSString *_title;
     UIOffset _titlePositionAdjustment;
+    UIOffset _imagePositionAdjustment;
     NSDictionary *_unselectedTitleAttributes;
     NSDictionary *_selectedTitleAttributes;
 }
@@ -69,15 +84,13 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    if (backgroundImage.size.width < frameSize.width) {
-        [backgroundImage drawAsPatternInRect:self.bounds];
-    } else {
-        [backgroundImage drawInRect:self.bounds];
-    }
+    [backgroundImage drawInRect:self.bounds];
     
     if (![_title length]) {
-        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2),
-                                     roundf(frameSize.height / 2 - imageSize.height / 2),
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
+                                     _imagePositionAdjustment.horizontal,
+                                     roundf(frameSize.height / 2 - imageSize.height / 2) +
+                                     _imagePositionAdjustment.vertical,
                                      imageSize.width, imageSize.height)];
     } else {
         CGSize titleSize = [_title sizeWithFont:[UIFont systemFontOfSize:12]
@@ -85,7 +98,9 @@
         UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
         CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
         
-        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2), imageStartingY,
+        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
+                                     _imagePositionAdjustment.horizontal,
+                                     imageStartingY + _imagePositionAdjustment.vertical,
                                      imageSize.width, imageSize.height)];
         
         CGContextSetFillColorWithColor(context, [titleAttributes[UITextAttributeTextColor] CGColor]);
@@ -156,6 +171,14 @@
 }
 
 #pragma mark - Images
+
+- (UIOffset)imagePositionAdjustment {
+    return _imagePositionAdjustment;
+}
+
+- (void)setImagePositionAdjustment:(UIOffset)adjustment {
+    _imagePositionAdjustment = adjustment;
+}
 
 - (UIImage *)backgroundSelectedImage {
     return [self selectedBackgroundImage];

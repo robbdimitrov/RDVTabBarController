@@ -61,9 +61,9 @@
         }
     }
     
+    [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
     [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height -
                                             [[self tabBar] minimumContentHeight])];
-    [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,13 +74,15 @@
 
 - (NSUInteger)supportedInterfaceOrientations {
     UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskAll;
-    for (UIViewController *viewCotroller in [self viewControllers]) {
-        if (![viewCotroller respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+    for (UIViewController *viewController in [self viewControllers]) {
+        if (![viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
             return UIInterfaceOrientationMaskPortrait;
         }
         
-        if (orientationMask > [viewCotroller supportedInterfaceOrientations]) {
-            orientationMask = [viewCotroller supportedInterfaceOrientations];
+        UIInterfaceOrientationMask supportedOrientations = [viewController supportedInterfaceOrientations];
+        
+        if (orientationMask > supportedOrientations) {
+            orientationMask = supportedOrientations;
         }
     }
     
