@@ -93,7 +93,7 @@
                                      _imagePositionAdjustment.vertical,
                                      imageSize.width, imageSize.height)];
     } else {
-        CGSize titleSize = [_title sizeWithFont:[UIFont systemFontOfSize:12]
+        CGSize titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
                               constrainedToSize:CGSizeMake(frameSize.width, 20)];
         UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
         CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
@@ -104,8 +104,13 @@
                                      imageSize.width, imageSize.height)];
         
         CGContextSetFillColorWithColor(context, [titleAttributes[UITextAttributeTextColor] CGColor]);
-        CGContextSetShadowWithColor(context, CGSizeMake(titleShadowOffset.horizontal, titleShadowOffset.vertical),
-                                    1.0, [titleAttributes[UITextAttributeTextShadowColor] CGColor]);
+        
+        UIColor *shadowColor = titleAttributes[UITextAttributeTextShadowColor];
+        
+        if (shadowColor) {
+            CGContextSetShadowWithColor(context, CGSizeMake(titleShadowOffset.horizontal, titleShadowOffset.vertical),
+                                        1.0, [shadowColor CGColor]);
+        }
         
         [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
                                       _titlePositionAdjustment.horizontal,
