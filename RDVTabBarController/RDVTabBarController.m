@@ -193,7 +193,7 @@
             UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
             
             if ([selectedController topViewController] != [selectedController viewControllers][0]) {
-                [selectedController popViewControllerAnimated:YES];
+                [selectedController popToRootViewControllerAnimated:YES];
             }
         }
         

@@ -45,17 +45,21 @@
 #pragma mark - Methods
 
 - (void)setupViewControllers {
-    UIViewController *firstViewController = [[RDVFirstViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    UIViewController *firstViewController = [[RDVFirstViewController alloc] init];
+    UIViewController *firstNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:firstViewController];
     
-    UIViewController *secondViewController = [[RDVSecondViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
+    UIViewController *secondViewController = [[RDVSecondViewController alloc] init];
+    UIViewController *secondNavigationController = [[UINavigationController alloc]
+                                                    initWithRootViewController:secondViewController];
     
-    UIViewController *thirdViewController = [[RDVThirdViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *thirdNavigationController = [[UINavigationController alloc] initWithRootViewController:thirdViewController];
+    UIViewController *thirdViewController = [[RDVThirdViewController alloc] init];
+    UIViewController *thirdNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:thirdViewController];
     
     RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
-    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController, thirdNavigationController]];
+    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController,
+                                           thirdNavigationController]];
     self.viewController = tabBarController;
     
     [self customizeTabBarForController:tabBarController];
