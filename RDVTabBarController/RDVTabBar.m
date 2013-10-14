@@ -1,4 +1,5 @@
 // RDVTabBar.m
+// RDVTabBarController
 //
 // Copyright (c) 2013 Robert Dimitrov
 //

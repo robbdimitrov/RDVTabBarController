@@ -1,4 +1,5 @@
 // RDVThirdViewController.m
+// RDVTabBarController
 //
 // Copyright (c) 2013 Robert Dimitrov
 //
@@ -57,7 +58,7 @@
 #pragma mark - Methods
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    [[cell textLabel] setText:[NSString stringWithFormat:@"Cell (%d, %d)", indexPath.section, indexPath.row]];
+    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %d", self.title, indexPath.row]];
 }
 
 #pragma mark - Table view

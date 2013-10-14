@@ -1,4 +1,5 @@
 // RDVTabBarItem.h
+// RDVTabBarController
 //
 // Copyright (c) 2013 Robert Dimitrov
 //
@@ -45,11 +46,17 @@
         _title = @"";
         _titlePositionAdjustment = UIOffsetZero;
         
-        _unselectedTitleAttributes = @{UITextAttributeFont: [UIFont systemFontOfSize:12],
-                                       UITextAttributeTextColor: [UIColor whiteColor],
-                                       UITextAttributeTextShadowColor: [UIColor whiteColor],
-                                       UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
-                                       };
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+            _unselectedTitleAttributes = @{
+                                           NSFontAttributeName: [UIFont systemFontOfSize:12],
+                                           NSForegroundColorAttributeName: [UIColor blackColor],
+                                           };
+        } else {
+            _unselectedTitleAttributes = @{
+                                           UITextAttributeFont: [UIFont systemFontOfSize:12],
+                                           UITextAttributeTextColor: [UIColor blackColor],
+                                           };
+        }
     }
     return self;
 }
@@ -93,31 +100,53 @@
                                      _imagePositionAdjustment.vertical,
                                      imageSize.width, imageSize.height)];
     } else {
-        CGSize titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
-                              constrainedToSize:CGSizeMake(frameSize.width, 20)];
-        UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
-        CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
-        
-        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
-                                     _imagePositionAdjustment.horizontal,
-                                     imageStartingY + _imagePositionAdjustment.vertical,
-                                     imageSize.width, imageSize.height)];
-        
-        CGContextSetFillColorWithColor(context, [titleAttributes[UITextAttributeTextColor] CGColor]);
-        
-        UIColor *shadowColor = titleAttributes[UITextAttributeTextShadowColor];
-        
-        if (shadowColor) {
-            CGContextSetShadowWithColor(context, CGSizeMake(titleShadowOffset.horizontal, titleShadowOffset.vertical),
-                                        1.0, [shadowColor CGColor]);
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+            CGSize titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                 attributes:@{NSFontAttributeName: titleAttributes[NSFontAttributeName]}
+                                                    context:nil].size;
+            
+            CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
+            
+            [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
+                                         _imagePositionAdjustment.horizontal,
+                                         imageStartingY + _imagePositionAdjustment.vertical,
+                                         imageSize.width, imageSize.height)];
+            
+            CGContextSetFillColorWithColor(context, [titleAttributes[NSForegroundColorAttributeName] CGColor]);
+            
+            [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
+                                          _titlePositionAdjustment.horizontal,
+                                          imageStartingY + imageSize.height + _titlePositionAdjustment.vertical,
+                                          titleSize.width, titleSize.height)
+                withAttributes:titleAttributes];
+        } else {
+            CGSize titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
+                                  constrainedToSize:CGSizeMake(frameSize.width, 20)];
+            UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
+            CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
+            
+            [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
+                                         _imagePositionAdjustment.horizontal,
+                                         imageStartingY + _imagePositionAdjustment.vertical,
+                                         imageSize.width, imageSize.height)];
+            
+            CGContextSetFillColorWithColor(context, [titleAttributes[UITextAttributeTextColor] CGColor]);
+            
+            UIColor *shadowColor = titleAttributes[UITextAttributeTextShadowColor];
+            
+            if (shadowColor) {
+                CGContextSetShadowWithColor(context, CGSizeMake(titleShadowOffset.horizontal, titleShadowOffset.vertical),
+                                            1.0, [shadowColor CGColor]);
+            }
+            
+            [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
+                                          _titlePositionAdjustment.horizontal,
+                                          imageStartingY + imageSize.height + _titlePositionAdjustment.vertical,
+                                          titleSize.width, titleSize.height)
+                      withFont:titleAttributes[UITextAttributeFont]
+                 lineBreakMode:NSLineBreakByTruncatingTail];
         }
-        
-        [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
-                                      _titlePositionAdjustment.horizontal,
-                                      imageStartingY + imageSize.height + _titlePositionAdjustment.vertical,
-                                      titleSize.width, titleSize.height)
-                  withFont:titleAttributes[UITextAttributeFont]
-             lineBreakMode:NSLineBreakByTruncatingTail];
     }
     
     CGContextRestoreGState(context);

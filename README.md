@@ -57,7 +57,7 @@ for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 
 ## Contact
 
-[Robert Dimitrov](http://github.com/robbdimitrov)  
+[Robert Dimitrov](http://robbdimitrov.com)
 [@robbdimitrov](https://twitter.com/robbdimitrov)
 
 ## License

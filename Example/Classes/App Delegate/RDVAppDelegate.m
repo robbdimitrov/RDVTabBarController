@@ -1,4 +1,5 @@
 // RDVAppDelegate.m
+// RDVTabBarController
 //
 // Copyright (c) 2013 Robert Dimitrov
 //
@@ -36,6 +37,8 @@
     [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
     
+    [self customizeInterface];
+    
     return YES;
 }
 
@@ -59,18 +62,50 @@
 }
 
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
-    UIImage *finishedImage = [[UIImage imageNamed:@"tabbar_selected_background"]
-                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    UIImage *unfinishedImage = [[UIImage imageNamed:@"tabbar_unselected_background"]
-                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
+    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
+    NSArray *tabBarItemImages = @[@"first", @"second", @"third"];
     
-    RDVTabBar *tabBar = [tabBarController tabBar];
-    
-    [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 63)];
+    NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *image = [UIImage imageNamed:@"first"];
-        [item setFinishedSelectedImage:image withFinishedUnselectedImage:image];
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
+                                                      [tabBarItemImages objectAtIndex:index]]];
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+                                                        [tabBarItemImages objectAtIndex:index]]];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        
+        index++;
+    }
+}
+
+- (void)customizeInterface {
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"navigationbar_background_tall"]
+                                      forBarMetrics:UIBarMetricsDefault];
+    } else {
+        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"backgroundtabbar_normal_background"]
+                                      forBarMetrics:UIBarMetricsDefault];
+        
+        NSDictionary *textAttributes = nil;
+        
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+            textAttributes = @{
+                               NSFontAttributeName: [UIFont boldSystemFontOfSize:20],
+                               NSForegroundColorAttributeName: [UIColor blackColor],
+                               };
+        } else {
+            textAttributes = @{
+                               UITextAttributeFont: [UIFont boldSystemFontOfSize:20],
+                               UITextAttributeTextColor: [UIColor blackColor],
+                               UITextAttributeTextShadowColor: [UIColor clearColor],
+                               UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
+                               };
+        }
+        
+        [navigationBarAppearance setTitleTextAttributes:textAttributes];
     }
 }
 
