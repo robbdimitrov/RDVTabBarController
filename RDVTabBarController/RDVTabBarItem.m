@@ -184,7 +184,7 @@
 
 - (void)setUnselectedTitleAttributes:(NSDictionary *)attributes {
     @synchronized(_unselectedTitleAttributes) {
-        if (attributes && [_unselectedTitleAttributes isEqual:attributes]) {
+        if (attributes && ![_unselectedTitleAttributes isEqual:attributes]) {
             _unselectedTitleAttributes = [attributes copy];
         }
     }
@@ -198,7 +198,7 @@
 
 - (void)setSelectedTitleAttributes:(NSDictionary *)attributes {
     @synchronized(_selectedTitleAttributes) {
-        if (attributes && [_selectedTitleAttributes isEqual:attributes]) {
+        if (attributes && ![_selectedTitleAttributes isEqual:attributes]) {
             _selectedTitleAttributes = [attributes copy];
         }
     }
