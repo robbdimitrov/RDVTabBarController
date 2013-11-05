@@ -121,6 +121,10 @@
     [_selectedItem setSelected:YES];
 }
 
+- (void)setHeight:(CGFloat)height {
+    [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), height)];
+}
+
 - (CGFloat)minimumContentHeight {
     CGFloat minimumTabBarContentHeight = CGRectGetHeight([self frame]);
     

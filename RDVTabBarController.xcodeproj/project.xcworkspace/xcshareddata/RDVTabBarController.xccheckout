@@ -2,37 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7F4C11E5-4A2B-4679-A154-0EDA2254352E</string>
+	<string>533386CB-FACB-4DA7-8528-A5AFBE7195DE</string>
 	<key>IDESourceControlProjectName</key>
 	<string>RDVTabBarController</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B6B779C8-4E99-4FBD-B8ED-81B83C03CC69</key>
-		<string>ssh://bitbucket.org/robbdimitrov/rdvtabbarcontroller.git</string>
+		<key>292A743A-D676-4573-82AF-66F69F795AAA</key>
+		<string>https://github.com/guilhermearaujo/RDVTabBarController.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>RDVTabBarController.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B6B779C8-4E99-4FBD-B8ED-81B83C03CC69</key>
+		<key>292A743A-D676-4573-82AF-66F69F795AAA</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/robbdimitrov/rdvtabbarcontroller.git</string>
+	<string>https://github.com/guilhermearaujo/RDVTabBarController.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B6B779C8-4E99-4FBD-B8ED-81B83C03CC69</string>
+	<string>292A743A-D676-4573-82AF-66F69F795AAA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B6B779C8-4E99-4FBD-B8ED-81B83C03CC69</string>
+			<string>292A743A-D676-4573-82AF-66F69F795AAA</string>
 			<key>IDESourceControlWCCName</key>
-			<string>RDVTabBarController</string>
+			<string>RDVTabBarControllerFork</string>
 		</dict>
 	</array>
 </dict>
