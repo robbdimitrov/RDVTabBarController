@@ -51,6 +51,11 @@
 @property UIEdgeInsets contentEdgeInsets;
 
 /**
+ * setHeight sets the height of RDVTabBar
+ */
+- (void)setHeight:(CGFloat)height;
+
+/**
  * minimumContentHeight returns the minimum height of RDVTabBar's items
  */
 - (CGFloat)minimumContentHeight;
