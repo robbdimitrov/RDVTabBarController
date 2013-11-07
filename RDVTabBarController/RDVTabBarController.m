@@ -43,8 +43,8 @@
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [view setBackgroundColor:[UIColor whiteColor]];
     
-    [view addSubview:self.contentView];
-    [view addSubview:self.tabBar];
+    [view addSubview:[self contentView]];
+    [view addSubview:[self tabBar]];
     
     self.view = view;
 }
@@ -102,19 +102,6 @@
 
 #pragma mark - Methods
 
-- (void)backButtonTapped:(id)sender {
-    if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
-        
-        if ([selectedController topViewController] != [selectedController viewControllers][0]) {
-            [selectedController popViewControllerAnimated:YES];
-            return;
-        }
-    }
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (UIViewController *)selectedViewController {
     return [[self viewControllers] objectAtIndex:[self selectedIndex]];
 }
@@ -156,8 +143,8 @@
 
 - (NSInteger)indexForViewController:(UIViewController *)viewController {
     UIViewController *searchedController = viewController;
-    if ([self navigationController]) {
-        searchedController = [viewController navigationController];
+    if ([searchedController navigationController]) {
+        searchedController = [searchedController navigationController];
     }
     return [[self viewControllers] indexOfObject:searchedController];
 }

@@ -26,6 +26,7 @@
 #import "RDVSecondViewController.h"
 #import "RDVThirdViewController.h"
 #import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
 
 @implementation RDVAppDelegate
 
@@ -90,7 +91,7 @@
         [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"navigationbar_background_tall"]
                                       forBarMetrics:UIBarMetricsDefault];
     } else {
-        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"backgroundtabbar_normal_background"]
+        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"navigationbar_background"]
                                       forBarMetrics:UIBarMetricsDefault];
         
         NSDictionary *textAttributes = nil;

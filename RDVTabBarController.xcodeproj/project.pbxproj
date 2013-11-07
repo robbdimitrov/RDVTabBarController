@@ -44,6 +44,8 @@
 		B4A63268176F6145004644CA /* iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A63266176F6145004644CA /* iPhone.png */; };
 		B4A742CD176E1BF10055367E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B4A742CB176E1BF10055367E /* LICENSE */; };
 		B4A742CE176E1BF10055367E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B4A742CC176E1BF10055367E /* README.md */; };
+		B4DB36A1182C4B7C0008898E /* iPad-small.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DB369F182C4B7C0008898E /* iPad-small.png */; };
+		B4DB36A2182C4B7C0008898E /* iPhone-small.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DB36A0182C4B7C0008898E /* iPhone-small.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		B4A63266176F6145004644CA /* iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone.png; sourceTree = "<group>"; };
 		B4A742CB176E1BF10055367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B4A742CC176E1BF10055367E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		B4DB369F182C4B7C0008898E /* iPad-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-small.png"; sourceTree = "<group>"; };
+		B4DB36A0182C4B7C0008898E /* iPhone-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone-small.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				B4A63265176F6145004644CA /* iPad.png */,
+				B4DB369F182C4B7C0008898E /* iPad-small.png */,
 				B4A63266176F6145004644CA /* iPhone.png */,
+				B4DB36A0182C4B7C0008898E /* iPhone-small.png */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -299,6 +305,8 @@
 				B4616C00172298FE00863892 /* Default-568h@2x.png in Resources */,
 				B4616C01172298FE00863892 /* Default.png in Resources */,
 				B44008EA180B11A500D8CB89 /* navigationbar_background_tall.png in Resources */,
+				B4DB36A2182C4B7C0008898E /* iPhone-small.png in Resources */,
+				B4DB36A1182C4B7C0008898E /* iPad-small.png in Resources */,
 				B44008E9180B11A500D8CB89 /* first_selected@2x.png in Resources */,
 				B44008E7180B11A500D8CB89 /* first_normal@2x.png in Resources */,
 				B44008F6180B185E00D8CB89 /* third_selected.png in Resources */,

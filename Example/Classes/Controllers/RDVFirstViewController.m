@@ -25,10 +25,6 @@
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
 
-@interface RDVFirstViewController ()
-
-@end
-
 @implementation RDVFirstViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +37,12 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [[self rdv_tabBarItem] setBadgeValue:@"3"];
+}
 
 - (NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

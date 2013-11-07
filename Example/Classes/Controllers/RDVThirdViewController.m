@@ -23,10 +23,6 @@
 
 #import "RDVThirdViewController.h"
 
-@interface RDVThirdViewController ()
-
-@end
-
 @implementation RDVThirdViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

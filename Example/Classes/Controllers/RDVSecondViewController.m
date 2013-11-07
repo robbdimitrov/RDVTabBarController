@@ -23,10 +23,6 @@
 
 #import "RDVSecondViewController.h"
 
-@interface RDVSecondViewController ()
-
-@end
-
 @implementation RDVSecondViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

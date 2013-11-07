@@ -1,13 +1,13 @@
 # RDVTabBarController
 
-![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/Screenshots/iPad.png)
+[![iPad screenshot](Screenshots/iPad-small.png)](Screenshots/iPad.png)
 
-![Current status](https://raw.github.com/robbdimitrov/RDVTabBarController/master/Screenshots/iPhone.png)
+[![iPhone screenshot](Screenshots/iPhone-small.png)](Screenshots/iPhone.png)
 
 * Supports iPad and iPhone
 * Supports landscape and portrait orientations
 * Can be used inside UINavigationController
-* Highly customizable
+* Customizable badges
 
 ## Setup
 
@@ -17,7 +17,7 @@ Add the items from `RDVTabBarController` directory to your project. If you don't
 
 Initialize RDVTabBarController:
 
-``` objective-c
+```
 UIViewController *firstViewController = [[RDVFirstViewController alloc] init];
 UIViewController *firstNavigationController = [[UINavigationController alloc]
                                                initWithRootViewController:firstViewController];
@@ -38,7 +38,7 @@ self.viewController = tabBarController;
 
 Customize RDVTabBarController:
 
-``` objective-c
+```
 UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
 UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
 NSArray *tabBarItemImages = @[@"first", @"second", @"third"];
@@ -67,7 +67,7 @@ for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 
 ## Contact
 
-[Robert Dimitrov](http://robbdimitrov.com)
+[Robert Dimitrov](http://robbdimitrov.com)   
 [@robbdimitrov](https://twitter.com/robbdimitrov)
 
 ## License

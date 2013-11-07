@@ -25,7 +25,6 @@
 
 @interface RDVTabBarItem () {
     NSString *_title;
-    UIOffset _titlePositionAdjustment;
     UIOffset _imagePositionAdjustment;
     NSDictionary *_unselectedTitleAttributes;
     NSDictionary *_selectedTitleAttributes;
@@ -43,6 +42,8 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        // Setup defaults
+        
         _title = @"";
         _titlePositionAdjustment = UIOffsetZero;
         
@@ -57,6 +58,11 @@
                                            UITextAttributeTextColor: [UIColor blackColor],
                                            };
         }
+        
+        _badgeBackgroundColor = [UIColor redColor];
+        _badgeTextColor = [UIColor whiteColor];
+        _badgeTextFont = [UIFont systemFontOfSize:12];
+        _badgePositionAdjustment = UIOffsetZero;
     }
     return self;
 }
@@ -68,9 +74,11 @@
 - (void)drawRect:(CGRect)rect {
     CGSize frameSize = self.frame.size;
     CGSize imageSize = CGSizeZero;
+    CGSize titleSize = CGSizeZero;
     NSDictionary *titleAttributes = nil;
     UIImage *backgroundImage = nil;
     UIImage *image = nil;
+    CGFloat imageStartingY = 0.0f;
     
     if ([self isSelected]) {
         image = [self selectedImage];
@@ -93,6 +101,8 @@
     
     [backgroundImage drawInRect:self.bounds];
     
+    // Draw image and title
+    
     if (![_title length]) {
         [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
                                      _imagePositionAdjustment.horizontal,
@@ -101,12 +111,12 @@
                                      imageSize.width, imageSize.height)];
     } else {
         if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
-            CGSize titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
+            titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{NSFontAttributeName: titleAttributes[NSFontAttributeName]}
                                                     context:nil].size;
             
-            CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
+            imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
             
             [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
                                          _imagePositionAdjustment.horizontal,
@@ -121,10 +131,10 @@
                                           titleSize.width, titleSize.height)
                 withAttributes:titleAttributes];
         } else {
-            CGSize titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
+            titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
                                   constrainedToSize:CGSizeMake(frameSize.width, 20)];
             UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
-            CGFloat imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
+            imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
             
             [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
                                          _imagePositionAdjustment.horizontal,
@@ -149,88 +159,71 @@
         }
     }
     
+    // Draw badges
+    
+    if ([[self badgeValue] length]) {
+        CGSize badgeSize = CGSizeZero;
+        
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+            badgeSize = [_badgeValue boundingRectWithSize:CGSizeMake(frameSize.width, 20)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:@{NSFontAttributeName: [self badgeTextFont]}
+                                                  context:nil].size;
+        } else {
+            badgeSize = [_badgeValue sizeWithFont:[self badgeTextFont]
+                                constrainedToSize:CGSizeMake(frameSize.width, 20)];
+        }
+        
+        CGFloat textOffset = 2.0f;
+        
+        if (badgeSize.width < badgeSize.height) {
+            badgeSize = CGSizeMake(badgeSize.height, badgeSize.height);
+        }
+        
+        CGRect badgeBackgroundFrame = CGRectMake(roundf(frameSize.width / 2 + (image.size.width / 2) * 0.9) +
+                                                 [self badgePositionAdjustment].horizontal,
+                                                 textOffset + [self badgePositionAdjustment].vertical,
+                                                 badgeSize.width + 2 * textOffset, badgeSize.height + 2 * textOffset);
+        
+        if ([self badgeBackgroundColor]) {
+            CGContextSetFillColorWithColor(context, [[self badgeBackgroundColor] CGColor]);
+            
+            CGContextFillEllipseInRect(context, badgeBackgroundFrame);
+        } else if ([self badgeBackgroundImage]) {
+            [[self badgeBackgroundImage] drawInRect:badgeBackgroundFrame];
+        }
+        
+        CGContextSetFillColorWithColor(context, [[self badgeTextColor] CGColor]);
+        
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+            NSMutableParagraphStyle *badgeTextStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+            [badgeTextStyle setLineBreakMode:NSLineBreakByWordWrapping];
+            [badgeTextStyle setAlignment:NSTextAlignmentCenter];
+            
+            NSDictionary *badgeTextAttributes = @{
+                                                  NSFontAttributeName: [self badgeTextFont],
+                                                  NSForegroundColorAttributeName: [self badgeTextColor],
+                                                  NSParagraphStyleAttributeName: badgeTextStyle,
+                                                  };
+            
+            [[self badgeValue] drawInRect:CGRectMake(CGRectGetMinX(badgeBackgroundFrame) + textOffset,
+                                                     CGRectGetMinY(badgeBackgroundFrame) + textOffset,
+                                                     badgeSize.width, badgeSize.height)
+                withAttributes:badgeTextAttributes];
+        } else {
+            [[self badgeValue] drawInRect:CGRectMake(CGRectGetMinX(badgeBackgroundFrame) + textOffset,
+                                                     CGRectGetMinY(badgeBackgroundFrame) + textOffset,
+                                                     badgeSize.width, badgeSize.height)
+                                 withFont:[self badgeTextFont]
+                            lineBreakMode:NSLineBreakByTruncatingTail
+                                alignment:NSTextAlignmentCenter];
+        }
+    }
+    
     CGContextRestoreGState(context);
 }
 
-#pragma mark - Title
-
-- (NSString *)title {
-    @synchronized(_title) {
-        return _title;
-    }
-}
-
-- (void)setTitle:(NSString *)title {
-    @synchronized(_title) {
-        if (title && ![_title isEqualToString:title]) {
-            _title = [title copy];
-        }
-    }
-}
-
-- (UIOffset)titlePositionAdjustment {
-    return _titlePositionAdjustment;
-}
-
-- (void)setTitlePositionAdjustment:(UIOffset)adjustment {
-    _titlePositionAdjustment = adjustment;
-}
-
-- (NSDictionary *)unselectedTitleAttributes {
-    @synchronized(_unselectedTitleAttributes) {
-        return _unselectedTitleAttributes;
-    }
-}
-
-- (void)setUnselectedTitleAttributes:(NSDictionary *)attributes {
-    @synchronized(_unselectedTitleAttributes) {
-        if (attributes && ![_unselectedTitleAttributes isEqual:attributes]) {
-            _unselectedTitleAttributes = [attributes copy];
-        }
-    }
-}
-
-- (NSDictionary *)selectedTitleAttributes {
-    @synchronized(_selectedTitleAttributes) {
-        return _selectedTitleAttributes;
-    }
-}
-
-- (void)setSelectedTitleAttributes:(NSDictionary *)attributes {
-    @synchronized(_selectedTitleAttributes) {
-        if (attributes && ![_selectedTitleAttributes isEqual:attributes]) {
-            _selectedTitleAttributes = [attributes copy];
-        }
-    }
-}
-
-#pragma mark - Images
-
-- (UIOffset)imagePositionAdjustment {
-    return _imagePositionAdjustment;
-}
-
-- (void)setImagePositionAdjustment:(UIOffset)adjustment {
-    _imagePositionAdjustment = adjustment;
-}
-
-- (UIImage *)backgroundSelectedImage {
-    return [self selectedBackgroundImage];
-}
-
-- (UIImage *)backgroundUnselectedImage {
-    return [self unselectedBackgroundImage];
-}
-
-- (void)setBackgroundSelectedImage:(UIImage *)selectedImage withUnselectedImage:(UIImage *)unselectedImage {
-    if (selectedImage && (selectedImage != [self selectedBackgroundImage])) {
-        [self setSelectedBackgroundImage:selectedImage];
-    }
-    
-    if (unselectedImage && (unselectedImage != [self unselectedBackgroundImage])) {
-        [self setUnselectedBackgroundImage:unselectedImage];
-    }
-}
+#pragma mark - Image configuration
 
 - (UIImage *)finishedSelectedImage {
     return [self selectedImage];
@@ -247,6 +240,26 @@
     
     if (unselectedImage && (unselectedImage != [self unselectedImage])) {
         [self setUnselectedImage:unselectedImage];
+    }
+}
+
+#pragma mark - Background configuration
+
+- (UIImage *)backgroundSelectedImage {
+    return [self selectedBackgroundImage];
+}
+
+- (UIImage *)backgroundUnselectedImage {
+    return [self unselectedBackgroundImage];
+}
+
+- (void)setBackgroundSelectedImage:(UIImage *)selectedImage withUnselectedImage:(UIImage *)unselectedImage {
+    if (selectedImage && (selectedImage != [self selectedBackgroundImage])) {
+        [self setSelectedBackgroundImage:selectedImage];
+    }
+    
+    if (unselectedImage && (unselectedImage != [self unselectedBackgroundImage])) {
+        [self setUnselectedBackgroundImage:unselectedImage];
     }
 }
 

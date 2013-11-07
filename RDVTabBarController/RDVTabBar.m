@@ -59,6 +59,8 @@
     
     NSInteger index = 0;
     
+    // Layout items
+    
     for (RDVTabBarItem *item in [self items]) {
         CGFloat itemHeight = [item itemHeight];
         
@@ -75,7 +77,7 @@
     }
 }
 
-#pragma mark - Methods
+#pragma mark - Configuration
 
 - (void)setItemWidth:(CGFloat)itemWidth {
     if (itemWidth > 0) {
@@ -94,6 +96,26 @@
         [self addSubview:item];
     }
 }
+
+- (void)setHeight:(CGFloat)height {
+    [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame),
+                              CGRectGetWidth(self.frame), height)];
+}
+
+- (CGFloat)minimumContentHeight {
+    CGFloat minimumTabBarContentHeight = CGRectGetHeight([self frame]);
+    
+    for (RDVTabBarItem *item in [self items]) {
+        CGFloat itemHeight = [item itemHeight];
+        if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
+            minimumTabBarContentHeight = itemHeight;
+        }
+    }
+    
+    return minimumTabBarContentHeight;
+}
+
+#pragma mark - Item selection
 
 - (void)tabBarItemWasSelected:(id)sender {
     if ([[self delegate] respondsToSelector:@selector(tabBar:shouldSelectItemAtIndex:)]) {
@@ -119,23 +141,6 @@
     
     _selectedItem = selectedItem;
     [_selectedItem setSelected:YES];
-}
-
-- (void)setHeight:(CGFloat)height {
-    [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), height)];
-}
-
-- (CGFloat)minimumContentHeight {
-    CGFloat minimumTabBarContentHeight = CGRectGetHeight([self frame]);
-    
-    for (RDVTabBarItem *item in [self items]) {
-        CGFloat itemHeight = [item itemHeight];
-        if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
-            minimumTabBarContentHeight = itemHeight;
-        }
-    }
-    
-    return minimumTabBarContentHeight;
 }
 
 @end
