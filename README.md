@@ -64,6 +64,7 @@ for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 
 * ARC
 * iOS 5.0 or later
+* Xcode 5
 
 ## Contact
 

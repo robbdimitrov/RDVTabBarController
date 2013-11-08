@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B407B65B182CCA01006F21A6 /* navigationbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B407B659182CCA01006F21A6 /* navigationbar_background.png */; };
+		B407B65C182CCA01006F21A6 /* navigationbar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B407B65A182CCA01006F21A6 /* navigationbar_background@2x.png */; };
 		B435F4F917396A8D00297C82 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B435F4F817396A8D00297C82 /* RDVTabBarItem.m */; };
 		B44008E2180B11A500D8CB89 /* tabbar_normal_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B44008D4180B11A500D8CB89 /* tabbar_normal_background.png */; };
 		B44008E3180B11A500D8CB89 /* tabbar_normal_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44008D5180B11A500D8CB89 /* tabbar_normal_background@2x.png */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B407B659182CCA01006F21A6 /* navigationbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar_background.png; sourceTree = "<group>"; };
+		B407B65A182CCA01006F21A6 /* navigationbar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_background@2x.png"; sourceTree = "<group>"; };
 		B435F4F717396A8D00297C82 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
 		B435F4F817396A8D00297C82 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
 		B44008D4180B11A500D8CB89 /* tabbar_normal_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_normal_background.png; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				B44008D9180B11A500D8CB89 /* first_normal@2x.png */,
 				B44008DA180B11A500D8CB89 /* first_selected.png */,
 				B44008DB180B11A500D8CB89 /* first_selected@2x.png */,
+				B407B659182CCA01006F21A6 /* navigationbar_background.png */,
+				B407B65A182CCA01006F21A6 /* navigationbar_background@2x.png */,
 				B44008DC180B11A500D8CB89 /* navigationbar_background_tall.png */,
 				B44008DD180B11A500D8CB89 /* navigationbar_background_tall@2x.png */,
 				B44008DE180B11A500D8CB89 /* second_normal.png */,
@@ -309,6 +315,8 @@
 				B4DB36A1182C4B7C0008898E /* iPad-small.png in Resources */,
 				B44008E9180B11A500D8CB89 /* first_selected@2x.png in Resources */,
 				B44008E7180B11A500D8CB89 /* first_normal@2x.png in Resources */,
+				B407B65C182CCA01006F21A6 /* navigationbar_background@2x.png in Resources */,
+				B407B65B182CCA01006F21A6 /* navigationbar_background.png in Resources */,
 				B44008F6180B185E00D8CB89 /* third_selected.png in Resources */,
 				B4616C02172298FE00863892 /* Default@2x.png in Resources */,
 				B44008E4180B11A500D8CB89 /* tabbar_selected_background.png in Resources */,
