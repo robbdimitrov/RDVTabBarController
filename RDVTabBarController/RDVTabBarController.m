@@ -42,33 +42,24 @@
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [view setBackgroundColor:[UIColor whiteColor]];
+    self.view = view;
     
     [view addSubview:[self contentView]];
     [view addSubview:[self tabBar]];
-    
-    self.view = view;
 }
 
-- (void)viewWillLayoutSubviews {
-    CGSize viewSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    CGSize viewSize = self.view.frame.size;
     CGFloat tabBarHeight = CGRectGetHeight([[self tabBar] frame]);
     if (!tabBarHeight) {
         tabBarHeight = 49;
     }
     
-    if (!self.parentViewController) {
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            viewSize = CGSizeMake(CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame));
-        }
-    }
-    
     [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
     [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height -
                                             [[self tabBar] minimumContentHeight])];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     [self setSelectedIndex:[self selectedIndex]];
 }
@@ -153,6 +144,8 @@
     if (!_tabBar) {
         _tabBar = [[RDVTabBar alloc] init];
         [_tabBar setBackgroundColor:[UIColor clearColor]];
+        [_tabBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
+                                     UIViewAutoresizingFlexibleTopMargin];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -162,8 +155,64 @@
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         [_contentView setBackgroundColor:[UIColor whiteColor]];
+        [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
+                                          UIViewAutoresizingFlexibleHeight];
     }
     return _contentView;
+}
+
+- (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated {
+    if (_tabBarHidden == hidden) {
+        return;
+    }
+    
+    _tabBarHidden = hidden;
+    
+    void (^block)() = ^{
+        CGSize viewSize = self.view.frame.size;
+        CGRect contentViewFrame = [[self contentView] frame];
+        CGRect tabBarFrame = [[self tabBar] frame];
+        
+        if (!self.parentViewController) {
+            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                viewSize = CGSizeMake(viewSize.height, viewSize.width);
+            }
+        }
+        
+        if (hidden) {
+            [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
+                                               viewSize.height,
+                                               CGRectGetWidth(tabBarFrame),
+                                               CGRectGetHeight(tabBarFrame))];
+            
+            [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
+                                                    CGRectGetMinY(contentViewFrame),
+                                                    CGRectGetWidth(contentViewFrame),
+                                                    viewSize.height)];
+        } else {
+            [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
+                                               viewSize.height - CGRectGetHeight(tabBarFrame),
+                                               CGRectGetWidth(tabBarFrame),
+                                               CGRectGetHeight(tabBarFrame))];
+            
+            [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
+                                                    CGRectGetMinY(contentViewFrame),
+                                                    CGRectGetWidth(contentViewFrame),
+                                                    viewSize.height - [[self tabBar] minimumContentHeight])];
+        }
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.24 animations:^{
+            block();
+        }];
+    } else {
+        block();
+    }
+}
+
+- (void)setTabBarHidden:(BOOL)hidden {
+    [self setTabBarHidden:hidden animated:NO];
 }
 
 #pragma mark - RDVTabBarDelegate
