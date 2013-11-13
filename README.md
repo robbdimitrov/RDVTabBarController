@@ -9,7 +9,13 @@
 * Can be used inside UINavigationController
 * Customizable badges
 
-## Setup
+## Installation
+
+### CocoaPods
+
+If you're using [CocoaPods](http://www.cocoapods.org), simply add `pod 'RDVTabBarController'` to your Podfile.
+
+### Drag & Drop
 
 Add the items from `RDVTabBarController` directory to your project. If you don't have ARC enabled, you will need to set a `-fobjc-arc` compiler flag on the `.m` source files.
 
