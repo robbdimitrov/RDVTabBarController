@@ -102,12 +102,14 @@
                                NSForegroundColorAttributeName: [UIColor blackColor],
                                };
         } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             textAttributes = @{
                                UITextAttributeFont: [UIFont boldSystemFontOfSize:20],
                                UITextAttributeTextColor: [UIColor blackColor],
                                UITextAttributeTextShadowColor: [UIColor clearColor],
                                UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
                                };
+#endif
         }
         
         [navigationBarAppearance setTitleTextAttributes:textAttributes];

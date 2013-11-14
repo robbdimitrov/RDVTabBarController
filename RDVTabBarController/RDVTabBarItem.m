@@ -53,10 +53,12 @@
                                            NSForegroundColorAttributeName: [UIColor blackColor],
                                            };
         } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             _unselectedTitleAttributes = @{
                                            UITextAttributeFont: [UIFont systemFontOfSize:12],
                                            UITextAttributeTextColor: [UIColor blackColor],
                                            };
+#endif
         }
         
         _badgeBackgroundColor = [UIColor redColor];
@@ -110,6 +112,7 @@
                                      _imagePositionAdjustment.vertical,
                                      imageSize.width, imageSize.height)];
     } else {
+        
         if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
             titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
@@ -131,6 +134,7 @@
                                           titleSize.width, titleSize.height)
                 withAttributes:titleAttributes];
         } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
                                   constrainedToSize:CGSizeMake(frameSize.width, 20)];
             UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
@@ -156,6 +160,7 @@
                                           titleSize.width, titleSize.height)
                       withFont:titleAttributes[UITextAttributeFont]
                  lineBreakMode:NSLineBreakByTruncatingTail];
+#endif
         }
     }
     
@@ -170,8 +175,10 @@
                                                attributes:@{NSFontAttributeName: [self badgeTextFont]}
                                                   context:nil].size;
         } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             badgeSize = [_badgeValue sizeWithFont:[self badgeTextFont]
                                 constrainedToSize:CGSizeMake(frameSize.width, 20)];
+#endif
         }
         
         CGFloat textOffset = 2.0f;
@@ -211,12 +218,14 @@
                                                      badgeSize.width, badgeSize.height)
                 withAttributes:badgeTextAttributes];
         } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             [[self badgeValue] drawInRect:CGRectMake(CGRectGetMinX(badgeBackgroundFrame) + textOffset,
                                                      CGRectGetMinY(badgeBackgroundFrame) + textOffset,
                                                      badgeSize.width, badgeSize.height)
                                  withFont:[self badgeTextFont]
                             lineBreakMode:NSLineBreakByTruncatingTail
                                 alignment:NSTextAlignmentCenter];
+#endif
         }
     }
     
