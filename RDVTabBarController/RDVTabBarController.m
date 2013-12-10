@@ -28,7 +28,7 @@
     UIView *_contentView;
 }
 
-@property (nonatomic) RDVTabBar *tabBar;
+@property (nonatomic, readwrite) RDVTabBar *tabBar;
 
 @end
 
@@ -53,13 +53,19 @@
     
     CGSize viewSize = self.view.frame.size;
     CGFloat tabBarHeight = CGRectGetHeight([[self tabBar] frame]);
+    CGFloat tabBarStartingY = viewSize.height;
+    CGFloat contentViewHeight = viewSize.height;
     if (!tabBarHeight) {
         tabBarHeight = 49;
     }
     
-    [[self tabBar] setFrame:CGRectMake(0, viewSize.height - tabBarHeight, viewSize.width, tabBarHeight)];
-    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, viewSize.height -
-                                            [[self tabBar] minimumContentHeight])];
+    if (![self isTabBarHidden]) {
+        tabBarStartingY = viewSize.height - tabBarHeight;
+        contentViewHeight = viewSize.height - [[self tabBar] minimumContentHeight];
+    }
+    
+    [[self tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
+    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, contentViewHeight)];
     
     [self setSelectedIndex:[self selectedIndex]];
 }
@@ -179,27 +185,23 @@
             }
         }
         
-        if (hidden) {
-            [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
-                                               viewSize.height,
-                                               CGRectGetWidth(tabBarFrame),
-                                               CGRectGetHeight(tabBarFrame))];
-            
-            [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
-                                                    CGRectGetMinY(contentViewFrame),
-                                                    CGRectGetWidth(contentViewFrame),
-                                                    viewSize.height)];
-        } else {
-            [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
-                                               viewSize.height - CGRectGetHeight(tabBarFrame),
-                                               CGRectGetWidth(tabBarFrame),
-                                               CGRectGetHeight(tabBarFrame))];
-            
-            [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
-                                                    CGRectGetMinY(contentViewFrame),
-                                                    CGRectGetWidth(contentViewFrame),
-                                                    viewSize.height - [[self tabBar] minimumContentHeight])];
+        CGFloat tabBarStartingY = viewSize.height;
+        CGFloat contentViewHeight = viewSize.height;
+        
+        if (!hidden) {
+            tabBarStartingY = viewSize.height - CGRectGetHeight(tabBarFrame);
+            contentViewHeight = viewSize.height - [[self tabBar] minimumContentHeight];
         }
+        
+        [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
+                                           tabBarStartingY,
+                                           CGRectGetWidth(tabBarFrame),
+                                           CGRectGetHeight(tabBarFrame))];
+        
+        [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
+                                                CGRectGetMinY(contentViewFrame),
+                                                CGRectGetWidth(contentViewFrame),
+                                                contentViewHeight)];
     };
     
     if (animated) {
