@@ -261,7 +261,11 @@
 
 - (RDVTabBarController *)rdv_tabBarController {
     if ([self navigationController]) {
-        return (RDVTabBarController *)[[self navigationController] parentViewController];
+        UIViewController *parent = [[self navigationController] parentViewController];
+        while (parent && ![parent isKindOfClass:[RDVTabBarController class]])
+            parent = [parent parentViewController];
+
+        return (RDVTabBarController *)parent;
     }
     return (RDVTabBarController *)[self parentViewController];
 }
