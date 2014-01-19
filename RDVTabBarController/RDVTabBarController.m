@@ -174,6 +174,10 @@
     
     _tabBarHidden = hidden;
     
+    // Unhiding is done at once
+    if (!hidden)
+        [self.tabBar setHidden:NO];
+
     void (^block)() = ^{
         CGSize viewSize = self.view.frame.size;
         CGRect contentViewFrame = [[self contentView] frame];
@@ -207,9 +211,15 @@
     if (animated) {
         [UIView animateWithDuration:0.24 animations:^{
             block();
+        } completion:^(BOOL finished) {
+            // Cannot add this to a block, that way bar is hidden at once
+            if (hidden)
+                [self.tabBar setHidden:YES];
         }];
     } else {
         block();
+        if (hidden)
+            [self.tabBar setHidden:YES];
     }
 }
 
