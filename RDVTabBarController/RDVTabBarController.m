@@ -174,17 +174,15 @@
     
     _tabBarHidden = hidden;
     
-    // Unhiding is done at once
-    if (!hidden)
-        [self.tabBar setHidden:NO];
+    __weak RDVTabBarController *weakSelf = self;
 
     void (^block)() = ^{
-        CGSize viewSize = self.view.frame.size;
-        CGRect contentViewFrame = [[self contentView] frame];
-        CGRect tabBarFrame = [[self tabBar] frame];
+        CGSize viewSize = weakSelf.view.frame.size;
+        CGRect contentViewFrame = [[weakSelf contentView] frame];
+        CGRect tabBarFrame = [[weakSelf tabBar] frame];
         
-        if (!self.parentViewController) {
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        if (![weakSelf parentViewController]) {
+            if (UIInterfaceOrientationIsLandscape([weakSelf interfaceOrientation])) {
                 viewSize = CGSizeMake(viewSize.height, viewSize.width);
             }
         }
@@ -194,32 +192,32 @@
         
         if (!hidden) {
             tabBarStartingY = viewSize.height - CGRectGetHeight(tabBarFrame);
-            contentViewHeight = viewSize.height - [[self tabBar] minimumContentHeight];
+            contentViewHeight = viewSize.height - [[weakSelf tabBar] minimumContentHeight];
+            [[weakSelf tabBar] setHidden:NO];
         }
         
-        [[self tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
-                                           tabBarStartingY,
-                                           CGRectGetWidth(tabBarFrame),
-                                           CGRectGetHeight(tabBarFrame))];
+        [[weakSelf tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
+                                               tabBarStartingY,
+                                               CGRectGetWidth(tabBarFrame),
+                                               CGRectGetHeight(tabBarFrame))];
         
-        [[self contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
-                                                CGRectGetMinY(contentViewFrame),
-                                                CGRectGetWidth(contentViewFrame),
-                                                contentViewHeight)];
+        [[weakSelf contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
+                                                    CGRectGetMinY(contentViewFrame),
+                                                    CGRectGetWidth(contentViewFrame),
+                                                    contentViewHeight)];
+    };
+    
+    void (^completion)(BOOL) = ^(BOOL finished){
+        if (hidden) {
+            [[weakSelf tabBar] setHidden:YES];
+        }
     };
     
     if (animated) {
-        [UIView animateWithDuration:0.24 animations:^{
-            block();
-        } completion:^(BOOL finished) {
-            // Cannot add this to a block, that way bar is hidden at once
-            if (hidden)
-                [self.tabBar setHidden:YES];
-        }];
+        [UIView animateWithDuration:0.24 animations:block completion:completion];
     } else {
         block();
-        if (hidden)
-            [self.tabBar setHidden:YES];
+        completion(YES);
     }
 }
 
@@ -270,14 +268,11 @@
 @implementation UIViewController (RDVTabBarControllerItem)
 
 - (RDVTabBarController *)rdv_tabBarController {
-    if ([self navigationController]) {
-        UIViewController *parent = [[self navigationController] parentViewController];
-        while (parent && ![parent isKindOfClass:[RDVTabBarController class]])
-            parent = [parent parentViewController];
-
-        return (RDVTabBarController *)parent;
+    UIViewController *parentViewController = [self parentViewController];
+    while (parentViewController && ![parentViewController isKindOfClass:[RDVTabBarController class]]) {
+        parentViewController = [parentViewController parentViewController];
     }
-    return (RDVTabBarController *)[self parentViewController];
+    return (RDVTabBarController *)parentViewController;
 }
 
 - (RDVTabBarItem *)rdv_tabBarItem {
