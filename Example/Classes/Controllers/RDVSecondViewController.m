@@ -22,6 +22,8 @@
 // THE SOFTWARE.
 
 #import "RDVSecondViewController.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
 
 @implementation RDVSecondViewController
 

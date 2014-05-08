@@ -23,6 +23,13 @@
 
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
+#import <objc/runtime.h>
+
+@interface UIViewController (RDVTabBarControllerItemInternal)
+
+- (void)rdv_setTabBarController:(RDVTabBarController *)tabBarController;
+
+@end
 
 @interface RDVTabBarController () {
     UIView *_contentView;
@@ -134,10 +141,15 @@
             RDVTabBarItem *tabBarItem = [[RDVTabBarItem alloc] init];
             [tabBarItem setTitle:viewController.title];
             [tabBarItems addObject:tabBarItem];
+            [viewController rdv_setTabBarController:self];
         }
         
         [[self tabBar] setItems:tabBarItems];
     } else {
+        for (UIViewController *viewController in _viewControllers) {
+            [viewController rdv_setTabBarController:nil];
+        }
+        
         _viewControllers = nil;
     }
 }
@@ -269,14 +281,24 @@
 
 #pragma mark - UIViewController+RDVTabBarControllerItem
 
+@implementation UIViewController (RDVTabBarControllerItemInternal)
+
+- (void)rdv_setTabBarController:(RDVTabBarController *)tabBarController {
+    objc_setAssociatedObject(self, @selector(rdv_tabBarController), tabBarController, OBJC_ASSOCIATION_ASSIGN);
+}
+
+@end
+
 @implementation UIViewController (RDVTabBarControllerItem)
 
 - (RDVTabBarController *)rdv_tabBarController {
-    UIViewController *parentViewController = [self parentViewController];
-    while (parentViewController && ![parentViewController isKindOfClass:[RDVTabBarController class]]) {
-        parentViewController = [parentViewController parentViewController];
+    RDVTabBarController *tabBarController = objc_getAssociatedObject(self, @selector(rdv_tabBarController));
+    
+    if (!tabBarController && self.parentViewController) {
+        tabBarController = [self.parentViewController rdv_tabBarController];
     }
-    return (RDVTabBarController *)parentViewController;
+    
+    return tabBarController;
 }
 
 - (RDVTabBarItem *)rdv_tabBarItem {
