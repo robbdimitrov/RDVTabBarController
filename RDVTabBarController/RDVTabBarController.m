@@ -104,6 +104,10 @@
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    if (selectedIndex >= self.viewControllers.count) {
+        return;
+    }
+    
     if ([self selectedViewController]) {
         [[self selectedViewController] willMoveToParentViewController:nil];
         [[[self selectedViewController] view] removeFromSuperview];
@@ -151,7 +155,7 @@
         _tabBar = [[RDVTabBar alloc] init];
         [_tabBar setBackgroundColor:[UIColor clearColor]];
         [_tabBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-                                     UIViewAutoresizingFlexibleTopMargin];
+         UIViewAutoresizingFlexibleTopMargin];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -162,7 +166,7 @@
         _contentView = [[UIView alloc] init];
         [_contentView setBackgroundColor:[UIColor whiteColor]];
         [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-                                          UIViewAutoresizingFlexibleHeight];
+         UIViewAutoresizingFlexibleHeight];
     }
     return _contentView;
 }
@@ -175,7 +179,7 @@
     _tabBarHidden = hidden;
     
     __weak RDVTabBarController *weakSelf = self;
-
+    
     void (^block)() = ^{
         CGSize viewSize = weakSelf.view.frame.size;
         CGRect contentViewFrame = [[weakSelf contentView] frame];

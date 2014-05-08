@@ -36,7 +36,7 @@
 /**
  * An array of the root view controllers displayed by the tab bar interface.
  */
-@property (nonatomic, copy) NSArray *viewControllers;
+@property (nonatomic, copy) IBOutletCollection(UIViewController) NSArray *viewControllers;
 
 /**
  * The tab bar view associated with this controller. (read-only)

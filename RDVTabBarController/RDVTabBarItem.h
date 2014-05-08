@@ -101,7 +101,7 @@
 /**
  * Text that is displayed in the upper-right corner of the item with a surrounding background.
  */
-@property (copy) NSString *badgeValue;
+@property (nonatomic, copy) NSString *badgeValue;
 
 /**
  * Image used for background of badge.

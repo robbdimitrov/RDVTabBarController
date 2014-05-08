@@ -42,36 +42,48 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Setup defaults
-        
-        _title = @"";
-        _titlePositionAdjustment = UIOffsetZero;
-        
-        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
-            _unselectedTitleAttributes = @{
-                                           NSFontAttributeName: [UIFont systemFontOfSize:12],
-                                           NSForegroundColorAttributeName: [UIColor blackColor],
-                                           };
-        } else {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-            _unselectedTitleAttributes = @{
-                                           UITextAttributeFont: [UIFont systemFontOfSize:12],
-                                           UITextAttributeTextColor: [UIColor blackColor],
-                                           };
-#endif
-        }
-        
-        _selectedTitleAttributes = [_unselectedTitleAttributes copy];
-        _badgeBackgroundColor = [UIColor redColor];
-        _badgeTextColor = [UIColor whiteColor];
-        _badgeTextFont = [UIFont systemFontOfSize:12];
-        _badgePositionAdjustment = UIOffsetZero;
+        [self commonInitialization];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInitialization];
     }
     return self;
 }
 
 - (id)init {
     return [self initWithFrame:CGRectZero];
+}
+
+- (void)commonInitialization {
+    // Setup defaults
+    
+    _title = @"";
+    _titlePositionAdjustment = UIOffsetZero;
+    
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+        _unselectedTitleAttributes = @{
+                                       NSFontAttributeName: [UIFont systemFontOfSize:12],
+                                       NSForegroundColorAttributeName: [UIColor blackColor],
+                                       };
+    } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        _unselectedTitleAttributes = @{
+                                       UITextAttributeFont: [UIFont systemFontOfSize:12],
+                                       UITextAttributeTextColor: [UIColor blackColor],
+                                       };
+#endif
+    }
+    
+    _selectedTitleAttributes = [_unselectedTitleAttributes copy];
+    _badgeBackgroundColor = [UIColor redColor];
+    _badgeTextColor = [UIColor whiteColor];
+    _badgeTextFont = [UIFont systemFontOfSize:12];
+    _badgePositionAdjustment = UIOffsetZero;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -251,6 +263,12 @@
     if (unselectedImage && (unselectedImage != [self unselectedImage])) {
         [self setUnselectedImage:unselectedImage];
     }
+}
+
+- (void)setBadgeValue:(NSString *)badgeValue {
+    _badgeValue = badgeValue;
+    
+    [self setNeedsDisplay];
 }
 
 #pragma mark - Background configuration

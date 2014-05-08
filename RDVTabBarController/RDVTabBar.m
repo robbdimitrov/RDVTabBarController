@@ -36,15 +36,27 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _backgroundView = [[UIView alloc] initWithFrame:frame];
-        [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
-        [self addSubview:_backgroundView];
+        [self commonInitialization];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInitialization];
     }
     return self;
 }
 
 - (id)init {
     return [self initWithFrame:CGRectZero];
+}
+
+- (void)commonInitialization {
+    _backgroundView = [[UIView alloc] init];
+    [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
+    [self addSubview:_backgroundView];
 }
 
 - (void)layoutSubviews {
