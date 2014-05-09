@@ -68,7 +68,7 @@
     
     if (![self isTabBarHidden]) {
         tabBarStartingY = viewSize.height - tabBarHeight;
-        contentViewHeight = viewSize.height - [[self tabBar] minimumContentHeight];
+        contentViewHeight = viewSize.height - tabBarHeight;
     }
     
     [[self tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
