@@ -43,16 +43,11 @@
 
 #pragma mark - View lifecycle
 
-- (void)loadView {
-    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
-    [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [view setBackgroundColor:[UIColor whiteColor]];
-    self.view = view;
-    
-    [view addSubview:[self contentView]];
-    [view addSubview:[self tabBar]];
+    [self.view addSubview:[self contentView]];
+    [self.view addSubview:[self tabBar]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +63,7 @@
     
     if (![self isTabBarHidden]) {
         tabBarStartingY = viewSize.height - tabBarHeight;
-        contentViewHeight = viewSize.height - tabBarHeight;
+        contentViewHeight = viewSize.height - ([[self tabBar] minimumContentHeight] ?: tabBarHeight);
     }
     
     [[self tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
