@@ -69,9 +69,9 @@ for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 }
 ```
 
-#### Make the tab bar transparent
+#### Make the tab bar translucent
 
-`RDVTabBar` has `transparent` property which determines how it is going to be handled.
+`RDVTabBar` has `translucent` property which determines how it is going to be handled.
 
 ```objective-c
 RDVTabBar *tabBar = tabBarController.tabBar;
@@ -79,7 +79,7 @@ RDVTabBar *tabBar = tabBarController.tabBar;
 // After the tabBarController initialization
 tabBar.translucent = YES;
 
-// Customizing the tabBar background
+// Customize the tabBar background
 tabBar.backgroundView.backgroundColor = [UIColor colorWithRed:245/255.0
                                                         green:245/255.0
                                                          blue:245/255.0
