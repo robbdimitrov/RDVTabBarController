@@ -87,33 +87,32 @@
 - (void)customizeInterface {
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
     
-    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
-        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"navigationbar_background_tall"]
-                                      forBarMetrics:UIBarMetricsDefault];
+    UIImage *backgroundImage = nil;
+    NSDictionary *textAttributes = nil;
+    
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background_tall"];
+        
+        textAttributes = @{
+                           NSFontAttributeName: [UIFont boldSystemFontOfSize:18],
+                           NSForegroundColorAttributeName: [UIColor blackColor],
+                           };
     } else {
-        [navigationBarAppearance setBackgroundImage:[UIImage imageNamed:@"navigationbar_background"]
-                                      forBarMetrics:UIBarMetricsDefault];
-        
-        NSDictionary *textAttributes = nil;
-        
-        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
-            textAttributes = @{
-                               NSFontAttributeName: [UIFont boldSystemFontOfSize:20],
-                               NSForegroundColorAttributeName: [UIColor blackColor],
-                               };
-        } else {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-            textAttributes = @{
-                               UITextAttributeFont: [UIFont boldSystemFontOfSize:20],
-                               UITextAttributeTextColor: [UIColor blackColor],
-                               UITextAttributeTextShadowColor: [UIColor clearColor],
-                               UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
-                               };
-#endif
-        }
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background"];
         
-        [navigationBarAppearance setTitleTextAttributes:textAttributes];
+        textAttributes = @{
+                           UITextAttributeFont: [UIFont boldSystemFontOfSize:18],
+                           UITextAttributeTextColor: [UIColor blackColor],
+                           UITextAttributeTextShadowColor: [UIColor clearColor],
+                           UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
+                           };
+#endif
     }
+    
+    [navigationBarAppearance setBackgroundImage:backgroundImage
+                                  forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setTitleTextAttributes:textAttributes];
 }
 
 @end

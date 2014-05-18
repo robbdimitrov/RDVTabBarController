@@ -55,8 +55,9 @@
 
 - (void)commonInitialization {
     _backgroundView = [[UIView alloc] init];
-    [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
     [self addSubview:_backgroundView];
+    
+    [self setTranslucent:NO];
 }
 
 - (void)layoutSubviews {
@@ -153,6 +154,19 @@
     
     _selectedItem = selectedItem;
     [_selectedItem setSelected:YES];
+}
+
+#pragma mark - Translucency
+
+- (void)setTranslucent:(BOOL)translucent {
+    _translucent = translucent;
+    
+    CGFloat alpha = (translucent ? 0.9 : 1.0);
+    
+    [_backgroundView setBackgroundColor:[UIColor colorWithRed:245/255.0
+                                                        green:245/255.0
+                                                         blue:245/255.0
+                                                        alpha:alpha]];
 }
 
 @end

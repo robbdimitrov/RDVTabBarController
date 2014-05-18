@@ -42,6 +42,16 @@
     [super viewDidLoad];
     
     [[self rdv_tabBarItem] setBadgeValue:@"3"];
+    
+    if (self.rdv_tabBarController.tabBar.translucent) {
+        UIEdgeInsets insets = UIEdgeInsetsMake(0,
+                                               0,
+                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
+                                               0);
+        
+        self.tableView.contentInset = insets;
+        self.tableView.scrollIndicatorInsets = insets;
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -80,13 +90,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 15;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [[self rdv_tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", indexPath.row+1]];
+    
+    [[self rdv_tabBarController] setTabBarHidden:!self.rdv_tabBarController.tabBarHidden animated:YES];
 }
 
 @end

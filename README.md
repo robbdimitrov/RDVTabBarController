@@ -21,9 +21,11 @@ Add the items from `RDVTabBarController` directory to your project. If you don't
 
 ## Example Usage
 
-Initialize RDVTabBarController:
+#### Initialize RDVTabBarController
 
-```
+The initialization is similar to the one for `UITabBarController`. Create an instance of the `tabBarController` and initialize its `viewControllers`.
+
+```objective-c
 UIViewController *firstViewController = [[RDVFirstViewController alloc] init];
 UIViewController *firstNavigationController = [[UINavigationController alloc]
                                                initWithRootViewController:firstViewController];
@@ -42,9 +44,10 @@ RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
 self.viewController = tabBarController;
 ```
 
-Customize RDVTabBarController:
+#### Customize RDVTabBarController
+Each `RDVTabBarItem` has `selectedBackground`, `unselectedBackground` and corresponding properties for the icons: `selectedImage` and `unselectedImage`.
 
-```
+```objective-c
 UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
 UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
 NSArray *tabBarItemImages = @[@"first", @"second", @"third"];
@@ -64,6 +67,39 @@ for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 
     index++;
 }
+```
+
+#### Make the tab bar transparent
+
+`RDVTabBar` has `transparent` property which determines how it is going to be handled.
+
+```objective-c
+RDVTabBar *tabBar = tabBarController.tabBar;
+
+// After the tabBarController initialization
+tabBar.translucent = YES;
+
+// Customizing the tabBar background
+tabBar.backgroundView.backgroundColor = [UIColor colorWithRed:245/255.0
+                                                        green:245/255.0
+                                                         blue:245/255.0
+                                                        alpha:0.9]];
+
+// Inside the tabbed viewControllers
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    ...
+    
+    if (self.rdv_tabBarController.tabBar.translucent) {
+    	CGFloat tabBarHeight = CGRectGetHeight(self.rdv_tabBarController.tabBar.frame);
+        UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, tabBarHeight, 0);
+        
+        self.tableView.contentInset = insets;
+        self.tableView.scrollIndicatorInsets = insets;
+    }
+}
+
 ```
 
 ## Requirements

@@ -53,23 +53,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    CGSize viewSize = self.view.frame.size;
-    CGFloat tabBarHeight = CGRectGetHeight([[self tabBar] frame]);
-    CGFloat tabBarStartingY = viewSize.height;
-    CGFloat contentViewHeight = viewSize.height;
-    if (!tabBarHeight) {
-        tabBarHeight = 49;
-    }
-    
-    if (![self isTabBarHidden]) {
-        tabBarStartingY = viewSize.height - tabBarHeight;
-        contentViewHeight = viewSize.height - ([[self tabBar] minimumContentHeight] ?: tabBarHeight);
-    }
-    
-    [[self tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
-    [[self contentView] setFrame:CGRectMake(0, 0, viewSize.width, contentViewHeight)];
-    
     [self setSelectedIndex:[self selectedIndex]];
+    
+    [self setTabBarHidden:NO animated:NO];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -179,18 +165,19 @@
 }
 
 - (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated {
-    if (_tabBarHidden == hidden) {
-        return;
-    }
-    
     _tabBarHidden = hidden;
     
     __weak RDVTabBarController *weakSelf = self;
     
     void (^block)() = ^{
         CGSize viewSize = weakSelf.view.frame.size;
-        CGRect contentViewFrame = [[weakSelf contentView] frame];
-        CGRect tabBarFrame = [[weakSelf tabBar] frame];
+        CGFloat tabBarStartingY = viewSize.height;
+        CGFloat contentViewHeight = viewSize.height;
+        CGFloat tabBarHeight = CGRectGetHeight([[weakSelf tabBar] frame]);
+        
+        if (!tabBarHeight) {
+            tabBarHeight = 49;
+        }
         
         if (![weakSelf parentViewController]) {
             if (UIInterfaceOrientationIsLandscape([weakSelf interfaceOrientation])) {
@@ -198,24 +185,16 @@
             }
         }
         
-        CGFloat tabBarStartingY = viewSize.height;
-        CGFloat contentViewHeight = viewSize.height;
-        
         if (!hidden) {
-            tabBarStartingY = viewSize.height - CGRectGetHeight(tabBarFrame);
-            contentViewHeight = viewSize.height - [[weakSelf tabBar] minimumContentHeight];
+            tabBarStartingY = viewSize.height - tabBarHeight;
+            if (![[weakSelf tabBar] isTranslucent]) {
+                contentViewHeight -= ([[weakSelf tabBar] minimumContentHeight] ?: tabBarHeight);
+            }
             [[weakSelf tabBar] setHidden:NO];
         }
         
-        [[weakSelf tabBar] setFrame:CGRectMake(CGRectGetMinX(tabBarFrame),
-                                               tabBarStartingY,
-                                               CGRectGetWidth(tabBarFrame),
-                                               CGRectGetHeight(tabBarFrame))];
-        
-        [[weakSelf contentView] setFrame:CGRectMake(CGRectGetMinX(contentViewFrame),
-                                                    CGRectGetMinY(contentViewFrame),
-                                                    CGRectGetWidth(contentViewFrame),
-                                                    contentViewHeight)];
+        [[weakSelf tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
+        [[weakSelf contentView] setFrame:CGRectMake(0, 0, viewSize.width, contentViewHeight)];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished){

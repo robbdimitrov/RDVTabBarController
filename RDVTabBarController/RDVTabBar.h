@@ -77,4 +77,9 @@
  */
 - (CGFloat)minimumContentHeight;
 
+/*
+ * Enable or disable tabBar translucency. Default is NO.
+ */
+@property (nonatomic, getter=isTranslucent) BOOL translucent;
+
 @end

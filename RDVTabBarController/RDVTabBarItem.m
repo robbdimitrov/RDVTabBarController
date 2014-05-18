@@ -62,10 +62,12 @@
 - (void)commonInitialization {
     // Setup defaults
     
+    [self setBackgroundColor:[UIColor clearColor]];
+    
     _title = @"";
     _titlePositionAdjustment = UIOffsetZero;
     
-    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
         _unselectedTitleAttributes = @{
                                        NSFontAttributeName: [UIFont systemFontOfSize:12],
                                        NSForegroundColorAttributeName: [UIColor blackColor],
@@ -126,7 +128,7 @@
                                      imageSize.width, imageSize.height)];
     } else {
         
-        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
             titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{NSFontAttributeName: titleAttributes[NSFontAttributeName]}
@@ -182,7 +184,7 @@
     if ([[self badgeValue] length]) {
         CGSize badgeSize = CGSizeZero;
         
-        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
             badgeSize = [_badgeValue boundingRectWithSize:CGSizeMake(frameSize.width, 20)
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{NSFontAttributeName: [self badgeTextFont]}
@@ -215,7 +217,7 @@
         
         CGContextSetFillColorWithColor(context, [[self badgeTextColor] CGColor]);
         
-        if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7.0) {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
             NSMutableParagraphStyle *badgeTextStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
             [badgeTextStyle setLineBreakMode:NSLineBreakByWordWrapping];
             [badgeTextStyle setAlignment:NSTextAlignmentCenter];

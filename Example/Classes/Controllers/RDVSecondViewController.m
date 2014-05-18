@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "RDVSecondViewController.h"
+#import "RDVTabBarController.h"
 
 @implementation RDVSecondViewController
 
@@ -35,6 +36,20 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    if (self.rdv_tabBarController.tabBar.translucent) {
+        UIEdgeInsets insets = UIEdgeInsetsMake(0,
+                                               0,
+                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
+                                               0);
+        
+        self.tableView.contentInset = insets;
+        self.tableView.scrollIndicatorInsets = insets;
+    }
+}
 
 - (NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -72,7 +87,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 15;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
