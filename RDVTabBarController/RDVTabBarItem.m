@@ -181,7 +181,7 @@
     
     // Draw badges
     
-    if ([[self badgeValue] length]) {
+    if ([[self badgeValue] integerValue] != 0) {
         CGSize badgeSize = CGSizeZero;
         
         if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
