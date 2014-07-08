@@ -148,7 +148,8 @@
         _tabBar = [[RDVTabBar alloc] init];
         [_tabBar setBackgroundColor:[UIColor clearColor]];
         [_tabBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-         UIViewAutoresizingFlexibleTopMargin];
+         UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|
+         UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -159,7 +160,8 @@
         _contentView = [[UIView alloc] init];
         [_contentView setBackgroundColor:[UIColor whiteColor]];
         [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-         UIViewAutoresizingFlexibleHeight];
+         UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleLeftMargin|
+         UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
     }
     return _contentView;
 }
@@ -170,19 +172,15 @@
     __weak RDVTabBarController *weakSelf = self;
     
     void (^block)() = ^{
-        CGSize viewSize = weakSelf.view.frame.size;
+        CGSize viewSize = weakSelf.view.bounds.size;
         CGFloat tabBarStartingY = viewSize.height;
         CGFloat contentViewHeight = viewSize.height;
         CGFloat tabBarHeight = CGRectGetHeight([[weakSelf tabBar] frame]);
         
+        NSLog(@"viewSize = %@", NSStringFromCGSize(viewSize));
+        
         if (!tabBarHeight) {
             tabBarHeight = 49;
-        }
-        
-        if (![weakSelf parentViewController]) {
-            if (UIInterfaceOrientationIsLandscape([weakSelf interfaceOrientation])) {
-                viewSize = CGSizeMake(viewSize.height, viewSize.width);
-            }
         }
         
         if (!hidden) {

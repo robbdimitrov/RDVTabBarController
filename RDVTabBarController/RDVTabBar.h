@@ -44,7 +44,7 @@
 /**
  * The tab bar’s delegate object.
  */
-@property id <RDVTabBarDelegate> delegate;
+@property (nonatomic, weak) id <RDVTabBarDelegate> delegate;
 
 /**
  * The items displayed on the tab bar.
