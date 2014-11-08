@@ -28,6 +28,7 @@
 		B44008F5180B185E00D8CB89 /* third_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44008F1180B185E00D8CB89 /* third_normal@2x.png */; };
 		B44008F6180B185E00D8CB89 /* third_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B44008F2180B185E00D8CB89 /* third_selected.png */; };
 		B44008F7180B185E00D8CB89 /* third_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44008F3180B185E00D8CB89 /* third_selected@2x.png */; };
+		B453D33A1A0E2219002F5656 /* RDVDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B453D3391A0E2219002F5656 /* RDVDetailsViewController.m */; };
 		B4616BAF17228DF700863892 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BAE17228DF700863892 /* UIKit.framework */; };
 		B4616BB117228DF700863892 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB017228DF700863892 /* Foundation.framework */; };
 		B4616BB317228DF700863892 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4616BB217228DF700863892 /* CoreGraphics.framework */; };
@@ -73,6 +74,8 @@
 		B44008F1180B185E00D8CB89 /* third_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_normal@2x.png"; sourceTree = "<group>"; };
 		B44008F2180B185E00D8CB89 /* third_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third_selected.png; sourceTree = "<group>"; };
 		B44008F3180B185E00D8CB89 /* third_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_selected@2x.png"; sourceTree = "<group>"; };
+		B453D3381A0E2219002F5656 /* RDVDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVDetailsViewController.h; sourceTree = "<group>"; };
+		B453D3391A0E2219002F5656 /* RDVDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVDetailsViewController.m; sourceTree = "<group>"; };
 		B4616BAB17228DF700863892 /* RDVTabBarController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDVTabBarController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4616BAE17228DF700863892 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B4616BB017228DF700863892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,6 +229,8 @@
 				B465733C1725A24700319236 /* RDVSecondViewController.m */,
 				B465733E1725A25100319236 /* RDVThirdViewController.h */,
 				B465733F1725A25100319236 /* RDVThirdViewController.m */,
+				B453D3381A0E2219002F5656 /* RDVDetailsViewController.h */,
+				B453D3391A0E2219002F5656 /* RDVDetailsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				B4616C04172298FE00863892 /* main.m in Sources */,
 				B4616C0C1722995D00863892 /* RDVAppDelegate.m in Sources */,
 				B49817A617229BB500AD294C /* RDVTabBar.m in Sources */,
+				B453D33A1A0E2219002F5656 /* RDVDetailsViewController.m in Sources */,
 				B49817A917229CBC00AD294C /* RDVTabBarController.m in Sources */,
 				B465733A1725A23D00319236 /* RDVFirstViewController.m in Sources */,
 				B465733D1725A24700319236 /* RDVSecondViewController.m in Sources */,

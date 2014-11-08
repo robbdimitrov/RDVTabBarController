@@ -55,7 +55,7 @@
     
     [self setSelectedIndex:[self selectedIndex]];
     
-    [self setTabBarHidden:NO animated:NO];
+    [self setTabBarHidden:self.isTabBarHidden animated:NO];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -147,9 +147,11 @@
     if (!_tabBar) {
         _tabBar = [[RDVTabBar alloc] init];
         [_tabBar setBackgroundColor:[UIColor clearColor]];
-        [_tabBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-         UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|
-         UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [_tabBar setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|
+                                      UIViewAutoresizingFlexibleTopMargin|
+                                      UIViewAutoresizingFlexibleLeftMargin|
+                                      UIViewAutoresizingFlexibleRightMargin|
+                                      UIViewAutoresizingFlexibleBottomMargin)];
         [_tabBar setDelegate:self];
     }
     return _tabBar;
@@ -159,9 +161,8 @@
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         [_contentView setBackgroundColor:[UIColor whiteColor]];
-        [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-         UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleLeftMargin|
-         UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [_contentView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|
+                                           UIViewAutoresizingFlexibleHeight)];
     }
     return _contentView;
 }
@@ -176,8 +177,6 @@
         CGFloat tabBarStartingY = viewSize.height;
         CGFloat contentViewHeight = viewSize.height;
         CGFloat tabBarHeight = CGRectGetHeight([[weakSelf tabBar] frame]);
-        
-        NSLog(@"viewSize = %@", NSStringFromCGSize(viewSize));
         
         if (!tabBarHeight) {
             tabBarHeight = 49;

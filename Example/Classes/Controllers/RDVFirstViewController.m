@@ -72,7 +72,7 @@
 #pragma mark - Methods
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %d", self.title, indexPath.row]];
+    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %ld", self.title, (long)indexPath.row]];
 }
 
 #pragma mark - Table view
@@ -96,9 +96,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [[self rdv_tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", indexPath.row+1]];
-    
-    [[self rdv_tabBarController] setTabBarHidden:!self.rdv_tabBarController.tabBarHidden animated:YES];
+    [[self rdv_tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%ld", indexPath.row+1]];
 }
 
 @end

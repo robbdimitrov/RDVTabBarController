@@ -23,6 +23,7 @@
 
 #import "RDVThirdViewController.h"
 #import "RDVTabBarController.h"
+#import "RDVDetailsViewController.h"
 
 @implementation RDVThirdViewController
 
@@ -69,7 +70,7 @@
 #pragma mark - Methods
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %d", self.title, indexPath.row]];
+    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %ld", self.title, (long)indexPath.row]];
 }
 
 #pragma mark - Table view
@@ -92,6 +93,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIViewController *viewController = [[RDVDetailsViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end
