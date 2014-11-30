@@ -99,15 +99,18 @@
 }
 
 - (void)setItems:(NSArray *)items {
-    for (RDVTabBarItem *item in items) {
-        [item removeFromSuperview];
-    }
+  for (id subview in self.subviews) {
+    if ([subview isKindOfClass:[RDVTabBarItem class]])
+      [subview removeFromSuperview];
+  }
+  
+  [items makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    _items = [items copy];
-    for (RDVTabBarItem *item in items) {
-        [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
-        [self addSubview:item];
-    }
+  _items = [items copy];
+  for (RDVTabBarItem *item in items) {
+    [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
+    [self addSubview:item];
+  }
 }
 
 - (void)setHeight:(CGFloat)height {
