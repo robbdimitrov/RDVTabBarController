@@ -58,6 +58,14 @@
     [self setTabBarHidden:self.isTabBarHidden animated:NO];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.selectedViewController.preferredStatusBarStyle;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return self.selectedViewController.preferredStatusBarUpdateAnimation;
+}
+
 - (NSUInteger)supportedInterfaceOrientations {
     UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskAll;
     for (UIViewController *viewController in [self viewControllers]) {
@@ -110,6 +118,8 @@
     [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
     [[self selectedViewController] didMoveToParentViewController:self];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)setViewControllers:(NSArray *)viewControllers {
