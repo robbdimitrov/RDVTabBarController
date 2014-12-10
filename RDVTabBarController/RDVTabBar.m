@@ -88,6 +88,8 @@
         
         index++;
     }
+    
+    [super layoutSubviews];
 }
 
 #pragma mark - Configuration
