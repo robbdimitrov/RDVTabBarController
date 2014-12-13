@@ -212,7 +212,10 @@
             
             CGContextFillEllipseInRect(context, badgeBackgroundFrame);
         } else if ([self badgeBackgroundImage]) {
-            [[self badgeBackgroundImage] drawInRect:badgeBackgroundFrame];
+            CGSize imageSize = [self badgeBackgroundImage].size;
+            
+            CGRect badgeFrame = CGRectMake(CGRectGetMidX(badgeBackgroundFrame) - imageSize.width/2, CGRectGetMidY(badgeBackgroundFrame) - imageSize.height/2, imageSize.width, imageSize.height);
+            [[self badgeBackgroundImage] drawInRect:badgeFrame];
         }
         
         CGContextSetFillColorWithColor(context, [[self badgeTextColor] CGColor]);

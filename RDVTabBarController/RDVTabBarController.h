@@ -23,6 +23,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RDVTabBar.h"
+#import "RDVTabBarItem.h"
 
 @protocol RDVTabBarControllerDelegate;
 

@@ -99,12 +99,12 @@
 }
 
 - (void)setItems:(NSArray *)items {
-    for (RDVTabBarItem *item in _items) {
+    for (RDVTabBarItem *item in items) {
         [item removeFromSuperview];
     }
     
     _items = [items copy];
-    for (RDVTabBarItem *item in _items) {
+    for (RDVTabBarItem *item in items) {
         [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
     }
