@@ -131,7 +131,7 @@
         if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
             titleSize = [_title boundingRectWithSize:CGSizeMake(frameSize.width, 20)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                 attributes:@{NSFontAttributeName: titleAttributes[NSFontAttributeName]}
+                                                 attributes:titleAttributes
                                                     context:nil].size;
             
             imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
@@ -151,7 +151,7 @@
         } else {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
             titleSize = [_title sizeWithFont:titleAttributes[UITextAttributeFont]
-                                  constrainedToSize:CGSizeMake(frameSize.width, 20)];
+                           constrainedToSize:CGSizeMake(frameSize.width, 20)];
             UIOffset titleShadowOffset = [titleAttributes[UITextAttributeTextShadowOffset] UIOffsetValue];
             imageStartingY = roundf((frameSize.height - imageSize.height - titleSize.height) / 2);
             
