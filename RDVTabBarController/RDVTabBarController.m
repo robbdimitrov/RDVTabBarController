@@ -155,8 +155,8 @@
 
 - (NSInteger)indexForViewController:(UIViewController *)viewController {
     UIViewController *searchedController = viewController;
-    if ([searchedController navigationController]) {
-        searchedController = [searchedController navigationController];
+    while (searchedController.parentViewController != nil && searchedController.parentViewController != self) {
+        searchedController = searchedController.parentViewController;
     }
     return [[self viewControllers] indexOfObject:searchedController];
 }
