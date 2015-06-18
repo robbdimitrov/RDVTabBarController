@@ -66,6 +66,7 @@
     
     _title = @"";
     _titlePositionAdjustment = UIOffsetZero;
+    _titleAlignment = RDVTabBarItemTitleVericalAlignmentIconBottom;
     
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
         _unselectedTitleAttributes = @{
@@ -96,7 +97,8 @@
     UIImage *backgroundImage = nil;
     UIImage *image = nil;
     CGFloat imageStartingY = 0.0f;
-    
+    CGFloat titleStartingY = 0.0f;
+
     if ([self isSelected]) {
         image = [self selectedImage];
         backgroundImage = [self selectedBackgroundImage];
@@ -143,9 +145,25 @@
             
             CGContextSetFillColorWithColor(context, [titleAttributes[NSForegroundColorAttributeName] CGColor]);
             
+            switch (self.titleAlignment) {
+                case RDVTabBarItemTitleVericalAlignmentIconBottom: {
+                    titleStartingY = imageStartingY + imageSize.height + _titlePositionAdjustment.vertical;
+                    break;
+                }
+                case RDVTabBarItemTitleVericalAlignmentViewBottom: {
+                    static const CGFloat titleBottomOffset = 5.;
+                    titleStartingY = frameSize.height - titleSize.height - titleBottomOffset;
+                    break;
+                }
+                default: {
+                    titleStartingY = imageStartingY + imageSize.height + _titlePositionAdjustment.vertical;
+                    break;
+                }
+            }
+            
             [_title drawInRect:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2) +
                                           _titlePositionAdjustment.horizontal,
-                                          imageStartingY + imageSize.height + _titlePositionAdjustment.vertical,
+                                          titleStartingY,
                                           titleSize.width, titleSize.height)
                 withAttributes:titleAttributes];
         } else {

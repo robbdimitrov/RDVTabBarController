@@ -23,6 +23,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, RDVTabBarItemTitleVericalAlignment) {
+    RDVTabBarItemTitleVericalAlignmentIconBottom,
+    RDVTabBarItemTitleVericalAlignmentViewBottom
+};
+
 @interface RDVTabBarItem : UIControl
 
 /**
@@ -56,6 +61,11 @@
  * The title attributes dictionary used for tab bar item's selected state.
  */
 @property (copy) NSDictionary *selectedTitleAttributes;
+
+/*
+ * The alignment for title label
+ */
+@property (assign) RDVTabBarItemTitleVericalAlignment titleAlignment;
 
 #pragma mark - Image configuration
 
