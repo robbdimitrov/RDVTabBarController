@@ -169,4 +169,22 @@
                                                         alpha:alpha]];
 }
 
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement{
+    return NO;
+}
+
+- (NSInteger)accessibilityElementCount{
+    return self.items.count;
+}
+
+- (id)accessibilityElementAtIndex:(NSInteger)index{
+    return self.items[index];
+}
+
+- (NSInteger)indexOfAccessibilityElement:(id)element{
+    return [self.items indexOfObject:element];
+}
+
 @end
