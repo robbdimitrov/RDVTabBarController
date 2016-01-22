@@ -38,7 +38,7 @@
 @end
 
 @implementation RDVTabBarItem
-
+@synthesize changeToPresentingItem = _changeToPresentingItem;
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -66,7 +66,7 @@
     
     _title = @"";
     _titlePositionAdjustment = UIOffsetZero;
-    
+    _changeToPresentingItem = NO;
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
         _unselectedTitleAttributes = @{
                                        NSFontAttributeName: [UIFont systemFontOfSize:12],
@@ -292,7 +292,13 @@
         [self setUnselectedBackgroundImage:unselectedImage];
     }
 }
-
+#pragma mark - FunctionItem configuration
+- (void)setChangeToPresentingItem:(BOOL)changeToPresentingItem{
+    _changeToPresentingItem = changeToPresentingItem;
+}
+- (BOOL)isChangeToPresentingItem {
+    return _changeToPresentingItem;
+}
 #pragma mark - Accessibility
 
 - (NSString *)accessibilityLabel{

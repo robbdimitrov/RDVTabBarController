@@ -36,7 +36,9 @@
  * Tells the delegate that the specified tab bar item is now selected.
  */
 - (void)tabBar:(RDVTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index;
-
+@optional
+- (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectFuntionItem:(RDVTabBarItem *)item;
+- (void)tabBar:(RDVTabBar *)tabBar didSelectFuctionItem:(RDVTabBarItem *)item;
 @end
 
 @interface RDVTabBar : UIView
@@ -56,11 +58,14 @@
  */
 @property (nonatomic, weak) RDVTabBarItem *selectedItem;
 
+@property (nonatomic) UIImage *backgroundImage;
+
 /**
  * backgroundView stays behind tabBar's items. If you want to add additional views, 
  * add them as subviews of backgroundView.
  */
 @property (nonatomic, readonly) UIView *backgroundView;
+
 
 /*
  * contentEdgeInsets can be used to center the items in the middle of the tabBar.

@@ -40,12 +40,10 @@
 @end
 
 @implementation RDVTabBarController
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.view addSubview:[self contentView]];
     [self.view addSubview:[self tabBar]];
 }
@@ -74,7 +72,6 @@
         }
         
         UIInterfaceOrientationMask supportedOrientations = [viewController supportedInterfaceOrientations];
-        
         if (orientationMask > supportedOrientations) {
             orientationMask = supportedOrientations;
         }
@@ -103,7 +100,6 @@
     if (selectedIndex >= self.viewControllers.count) {
         return;
     }
-    
     if ([self selectedViewController]) {
         [[self selectedViewController] willMoveToParentViewController:nil];
         [[[self selectedViewController] view] removeFromSuperview];
@@ -118,7 +114,6 @@
     [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
     [[self selectedViewController] didMoveToParentViewController:self];
-    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -151,6 +146,7 @@
         
         _viewControllers = nil;
     }
+    _functionItemIndex = [viewControllers count]+1;
 }
 
 - (NSInteger)indexForViewController:(UIViewController *)viewController {
@@ -229,25 +225,52 @@
 - (void)setTabBarHidden:(BOOL)hidden {
     [self setTabBarHidden:hidden animated:NO];
 }
+- (void)setFunctionItemIndex:(NSInteger)functionItemIndex {
+    RDVTabBarItem * item;
+    if (_functionItemIndex != functionItemIndex && (_functionItemIndex >=0 && _functionItemIndex < [[[self tabBar] items] count])) {
+        item = [[[self tabBar] items] objectAtIndex:_functionItemIndex];
+        item.changeToPresentingItem = NO;
+    }
+    if (functionItemIndex < 0 || functionItemIndex > [[[self tabBar] items] count]-1) {
+        return;
+    }
+    _functionItemIndex = functionItemIndex;
+    item = [[[self tabBar] items] objectAtIndex:functionItemIndex];
+    item.changeToPresentingItem = YES;
 
+}
 #pragma mark - RDVTabBarDelegate
-
+- (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectFuntionItem:(RDVTabBarItem *)item {
+    NSInteger index = [[tabBar items] indexOfObject:item];
+    if ([[self delegate] respondsToSelector:@selector(tabBarController:shouldPresentViewController:)]) {
+        if (![[self delegate] tabBarController:self shouldPresentViewController:[self viewControllers][index]]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+- (void)tabBar:(RDVTabBar *)tabBar didSelectFuctionItem:(RDVTabBarItem *)item {
+    NSInteger index = [[tabBar items] indexOfObject:item];
+    [self presentViewController:[[self viewControllers] objectAtIndex:index] animated:YES completion:^{
+        ;
+    }];
+    if ([[self delegate] respondsToSelector:@selector(tabBarController:didPresentViewController:)]) {
+        [[self delegate] tabBarController:self didPresentViewController:[self viewControllers][index]];
+    }
+}
 - (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {
     if ([[self delegate] respondsToSelector:@selector(tabBarController:shouldSelectViewController:)]) {
         if (![[self delegate] tabBarController:self shouldSelectViewController:[self viewControllers][index]]) {
             return NO;
         }
     }
-    
     if ([self selectedViewController] == [self viewControllers][index]) {
         if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
             UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
-            
             if ([selectedController topViewController] != [selectedController viewControllers][0]) {
                 [selectedController popToRootViewControllerAnimated:YES];
             }
         }
-        
         return NO;
     }
     
@@ -286,7 +309,6 @@
     if (!tabBarController && self.parentViewController) {
         tabBarController = [self.parentViewController rdv_tabBarController];
     }
-    
     return tabBarController;
 }
 

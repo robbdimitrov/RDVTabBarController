@@ -128,4 +128,9 @@
  */
 @property (nonatomic) UIFont *badgeTextFont;
 
+#pragma mark - FunctionItem configuration
+/**
+ * change origin item to be a presenting item. Default is NO
+ */
+@property (nonatomic, getter=isChangeToPresentingItem) BOOL changeToPresentingItem;
 @end

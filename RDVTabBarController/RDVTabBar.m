@@ -25,14 +25,12 @@
 #import "RDVTabBarItem.h"
 
 @interface RDVTabBar ()
-
 @property (nonatomic) CGFloat itemWidth;
 @property (nonatomic) UIView *backgroundView;
 
 @end
 
 @implementation RDVTabBar
-
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -63,29 +61,24 @@
 - (void)layoutSubviews {
     CGSize frameSize = self.frame.size;
     CGFloat minimumContentHeight = [self minimumContentHeight];
-    
     [[self backgroundView] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
-                                            frameSize.width, frameSize.height)];
-    
+                                               frameSize.width, frameSize.height)];
+    if (_backgroundImage && _backgroundView) {
+        [[self backgroundImage] drawInRect:[[self backgroundView] bounds]];
+    }
     [self setItemWidth:roundf((frameSize.width - [self contentEdgeInsets].left -
                                [self contentEdgeInsets].right) / [[self items] count])];
-    
     NSInteger index = 0;
-    
-    // Layout items
-    
+    // Layout items & funtion item
     for (RDVTabBarItem *item in [self items]) {
         CGFloat itemHeight = [item itemHeight];
-        
         if (!itemHeight) {
             itemHeight = frameSize.height;
         }
-        
         [item setFrame:CGRectMake(self.contentEdgeInsets.left + (index * self.itemWidth),
                                   roundf(frameSize.height - itemHeight) - self.contentEdgeInsets.top,
                                   self.itemWidth, itemHeight - self.contentEdgeInsets.bottom)];
         [item setNeedsDisplay];
-        
         index++;
     }
 }
@@ -97,19 +90,16 @@
         _itemWidth = itemWidth;
     }
 }
-
 - (void)setItems:(NSArray *)items {
     for (RDVTabBarItem *item in _items) {
         [item removeFromSuperview];
     }
-    
     _items = [items copy];
     for (RDVTabBarItem *item in _items) {
         [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
     }
 }
-
 - (void)setHeight:(CGFloat)height {
     [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame),
                               CGRectGetWidth(self.frame), height)];
@@ -124,25 +114,44 @@
             minimumTabBarContentHeight = itemHeight;
         }
     }
-    
     return minimumTabBarContentHeight;
+}
+- (void)setBackgroundImage:(UIImage *)backgroundImage {
+    if (backgroundImage == _backgroundImage) {
+        return;
+    }
+    _backgroundImage = backgroundImage;
+    [self setNeedsLayout];
 }
 
 #pragma mark - Item selection
 
 - (void)tabBarItemWasSelected:(id)sender {
-    if ([[self delegate] respondsToSelector:@selector(tabBar:shouldSelectItemAtIndex:)]) {
-        NSInteger index = [self.items indexOfObject:sender];
-        if (![[self delegate] tabBar:self shouldSelectItemAtIndex:index]) {
-            return;
+    if ([sender isKindOfClass:[RDVTabBarItem class]]) {
+        RDVTabBarItem * item = (RDVTabBarItem *)sender;
+        if ([item isChangeToPresentingItem]) {
+            if ([[self delegate] respondsToSelector:@selector(tabBar:shouldSelectFuntionItem:)]) {
+                if (![[self delegate] tabBar:self shouldSelectFuntionItem:item]) {
+                    return;
+                }
+            }
+            if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectFuctionItem:)]) {
+                [[self delegate] tabBar:self didSelectFuctionItem:item];
+            }
         }
-    }
-    
-    [self setSelectedItem:sender];
-    
-    if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {
-        NSInteger index = [self.items indexOfObject:self.selectedItem];
-        [[self delegate] tabBar:self didSelectItemAtIndex:index];
+        else {
+            if ([[self delegate] respondsToSelector:@selector(tabBar:shouldSelectItemAtIndex:)]) {
+                NSInteger index = [self.items indexOfObject:sender];
+                if (![[self delegate] tabBar:self shouldSelectItemAtIndex:index]) {
+                    return;
+                }
+            }
+            [self setSelectedItem:sender];
+            if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {
+                NSInteger index = [self.items indexOfObject:self.selectedItem];
+                [[self delegate] tabBar:self didSelectItemAtIndex:index];
+            }
+        }
     }
 }
 
@@ -155,20 +164,15 @@
     _selectedItem = selectedItem;
     [_selectedItem setSelected:YES];
 }
-
 #pragma mark - Translucency
-
 - (void)setTranslucent:(BOOL)translucent {
     _translucent = translucent;
-    
     CGFloat alpha = (translucent ? 0.9 : 1.0);
-    
     [_backgroundView setBackgroundColor:[UIColor colorWithRed:245/255.0
                                                         green:245/255.0
                                                          blue:245/255.0
                                                         alpha:alpha]];
 }
-
 #pragma mark - Accessibility
 
 - (BOOL)isAccessibilityElement{

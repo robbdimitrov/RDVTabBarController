@@ -58,11 +58,11 @@
  */
 @property (nonatomic, getter=isTabBarHidden) BOOL tabBarHidden;
 
+@property (nonatomic) NSInteger functionItemIndex;   //default is [viewControllers count]+1
 /**
  * Changes the visibility of the tab bar.
  */
 - (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated;
-
 @end
 
 @protocol RDVTabBarControllerDelegate <NSObject>
@@ -77,10 +77,18 @@
  */
 - (void)tabBarController:(RDVTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 
+/**
+ * Tells the delegate that the user selected an item in the tab bar.
+ */
+@optional
+- (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldPresentViewController:(UIViewController *)viewController;
+- (void)tabBarController:(RDVTabBarController *)tabBarController didPresentViewController:(UIViewController *)viewController;
+
 @end
 
 @interface UIViewController (RDVTabBarControllerItem)
 
+@property(nonatomic, setter = rdv_setTabBarFuntionItem:) RDVTabBarItem *rdv_tabBarFuntionItem;
 /**
  * The tab bar item that represents the view controller when added to a tab bar controller.
  */
