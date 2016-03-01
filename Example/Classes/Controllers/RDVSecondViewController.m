@@ -39,7 +39,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if (self.presentingViewController) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];;
+    }
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
                                                0,
@@ -67,7 +69,11 @@
 }
 
 #pragma mark - Methods
-
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:^{
+        ;
+    }];
+}
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@ Controller Cell %ld", self.title, (long)indexPath.row]];
 }

@@ -37,7 +37,6 @@
     [self setupViewControllers];
     [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
-    
     [self customizeInterface];
     
     return YES;
@@ -61,6 +60,7 @@
     RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
     [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController,
                                            thirdNavigationController]];
+    tabBarController.functionItemIndex = 1;
     self.viewController = tabBarController;
     
     [self customizeTabBarForController:tabBarController];
@@ -74,10 +74,20 @@
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
-                                                      [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
-                                                        [tabBarItemImages objectAtIndex:index]]];
+        UIImage *selectedimage;
+        UIImage *unselectedimage;
+        if (index == 1) {
+            selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"postBtn",
+                                                 [tabBarItemImages objectAtIndex:index]]];
+            unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"postBtn",
+                                                   [tabBarItemImages objectAtIndex:index]]];
+        }
+        else {
+            selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
+                                                 [tabBarItemImages objectAtIndex:index]]];
+            unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+                                                   [tabBarItemImages objectAtIndex:index]]];
+        }
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         
         index++;
