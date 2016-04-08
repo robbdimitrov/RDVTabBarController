@@ -215,6 +215,7 @@
         
         [[weakSelf tabBar] setFrame:CGRectMake(0, tabBarStartingY, viewSize.width, tabBarHeight)];
         [[weakSelf contentView] setFrame:CGRectMake(0, 0, viewSize.width, contentViewHeight)];
+        [[[weakSelf selectedViewController] view] setFrame:[[weakSelf contentView] bounds]];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished){
