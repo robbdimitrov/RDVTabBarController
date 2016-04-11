@@ -104,12 +104,12 @@
 }
 
 - (void)setItems:(NSArray *)items {
-    for (RDVTabBarItem *item in items) {
+    for (RDVTabBarItem *item in _items) {
         [item removeFromSuperview];
     }
     
     _items = [items copy];
-    for (RDVTabBarItem *item in items) {
+    for (RDVTabBarItem *item in _items) {
         [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
     }
@@ -172,6 +172,24 @@
                                                         green:245/255.0
                                                          blue:245/255.0
                                                         alpha:alpha]];
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement{
+    return NO;
+}
+
+- (NSInteger)accessibilityElementCount{
+    return self.items.count;
+}
+
+- (id)accessibilityElementAtIndex:(NSInteger)index{
+    return self.items[index];
+}
+
+- (NSInteger)indexOfAccessibilityElement:(id)element{
+    return [self.items indexOfObject:element];
 }
 
 @end
