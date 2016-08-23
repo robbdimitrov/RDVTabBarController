@@ -139,6 +139,8 @@
     if (viewControllers && [viewControllers isKindOfClass:[NSArray class]]) {
         _viewControllers = [viewControllers copy];
         
+        [self.tabBar.items makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
         NSMutableArray *tabBarItems = [[NSMutableArray alloc] init];
         
         for (UIViewController *viewController in viewControllers) {
