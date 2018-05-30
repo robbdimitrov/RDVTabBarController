@@ -109,6 +109,10 @@
         return;
     }
     
+    //调整contentView的高度:防止在tabBar 没有隐藏的状态下，设置selectedIndex；否则contentView 的高度就是不是我们想要的
+    //adjust  the height of contentView ;prevent a event that reset the selectedIndex when the tabBarHidden is yes
+    [self setTabBarHidden:NO animated:NO];
+    
     if ([self selectedViewController]) {
         [[self selectedViewController] willMoveToParentViewController:nil];
         [[[self selectedViewController] view] removeFromSuperview];
