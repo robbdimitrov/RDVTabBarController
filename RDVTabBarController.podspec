@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RDVTabBarController"
-  s.version      = "1.1.9"
+  s.version      = "1.1.10"
   s.summary      = "Highly customizable tabBar and tabBarController for iOS"
   s.description  = "RDVTabBarController is iPad and iPhone compatible. Supports landscape and portrait orientations and can be used inside UINavigationController."
   s.homepage     = "https://github.com/robbdimitrov/RDVTabBarController"
