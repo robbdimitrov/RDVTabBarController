@@ -46,15 +46,15 @@
 #pragma mark - Methods
 
 - (void)setupViewControllers {
-    UIViewController *firstViewController = [[RDVFirstViewController alloc] init];
+    UIViewController *firstViewController = [[RDVFirstViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *firstNavigationController = [[UINavigationController alloc]
                                                    initWithRootViewController:firstViewController];
     
-    UIViewController *secondViewController = [[RDVSecondViewController alloc] init];
+    UIViewController *secondViewController = [[RDVSecondViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *secondNavigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:secondViewController];
     
-    UIViewController *thirdViewController = [[RDVThirdViewController alloc] init];
+    UIViewController *thirdViewController = [[RDVThirdViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *thirdNavigationController = [[UINavigationController alloc]
                                                    initWithRootViewController:thirdViewController];
     
