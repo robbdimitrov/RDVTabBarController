@@ -26,19 +26,12 @@
 
 @implementation RDVSecondViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Second";
-    }
-    return self;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"Second";
     
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
@@ -49,21 +42,6 @@
         self.tableView.contentInset = insets;
         self.tableView.scrollIndicatorInsets = insets;
     }
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return UIInterfaceOrientationMaskAll;
-    } else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return YES;
-    }
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - Methods

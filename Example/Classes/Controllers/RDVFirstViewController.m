@@ -27,19 +27,12 @@
 
 @implementation RDVFirstViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"First";
-    }
-    return self;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"First";
     
     [[self rdv_tabBarItem] setBadgeValue:@"3"];
     
@@ -52,21 +45,6 @@
         self.tableView.contentInset = insets;
         self.tableView.scrollIndicatorInsets = insets;
     }
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return UIInterfaceOrientationMaskAll;
-    } else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return YES;
-    }
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - Methods

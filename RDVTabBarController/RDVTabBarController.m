@@ -71,7 +71,7 @@
     return self.selectedViewController.preferredStatusBarUpdateAnimation;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskAll;
     for (UIViewController *viewController in [self viewControllers]) {
         if (![viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
@@ -86,16 +86,6 @@
     }
     
     return orientationMask;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    for (UIViewController *viewCotroller in [self viewControllers]) {
-        if (![viewCotroller respondsToSelector:@selector(shouldAutorotateToInterfaceOrientation:)] ||
-            ![viewCotroller shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-            return NO;
-        }
-    }
-    return YES;
 }
 
 #pragma mark - Methods
@@ -195,7 +185,7 @@
     
     __weak RDVTabBarController *weakSelf = self;
     
-    void (^block)() = ^{
+    void (^block)(void) = ^{
         CGSize viewSize = weakSelf.view.bounds.size;
         CGFloat tabBarStartingY = viewSize.height;
         CGFloat contentViewHeight = viewSize.height;
