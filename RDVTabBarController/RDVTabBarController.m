@@ -244,8 +244,8 @@
     }
     
     if ([self selectedViewController] == [self viewControllers][index]) {
-        if ([[self delegate] respondsToSelector:@selector(tabBarController:tapOnSelectedItemAtIndex:)]) {
-            [[self delegate] tabBarController:self tapOnSelectedItemAtIndex:index];
+        if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectItemAtIndex:)]) {
+            [[self delegate] tabBarController:self didSelectItemAtIndex:index];
         }
         
         if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {

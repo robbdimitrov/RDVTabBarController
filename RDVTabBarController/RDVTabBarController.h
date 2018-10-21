@@ -80,7 +80,7 @@
 /**
  * Tells the delegate that the user tap on the selected item in the tab bar.
  */
-- (void)tabBarController:(RDVTabBarController *)tabBarController tapOnSelectedItemAtIndex:(NSInteger)index;
+- (void)tabBarController:(RDVTabBarController *)tabBarController didSelectItemAtIndex:(NSInteger)index;
 
 @end
 
