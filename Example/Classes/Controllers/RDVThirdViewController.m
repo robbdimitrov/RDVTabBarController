@@ -27,12 +27,18 @@
 
 @implementation RDVThirdViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.title = @"Third";
+    }
+    return self;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Third";
     
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,

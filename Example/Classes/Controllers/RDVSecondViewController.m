@@ -26,12 +26,18 @@
 
 @implementation RDVSecondViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.title = @"Second";
+    }
+    return self;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Second";
     
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
