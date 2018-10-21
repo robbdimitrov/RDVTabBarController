@@ -27,12 +27,18 @@
 
 @implementation RDVFirstViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.title = @"First";
+    }
+    return self;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"First";
     
     [[self rdv_tabBarItem] setBadgeValue:@"3"];
     
