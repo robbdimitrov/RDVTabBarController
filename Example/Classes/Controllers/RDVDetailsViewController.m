@@ -18,11 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Details";
+    self.title = NSLocalizedString(@"Details", nil);
     self.view.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1.0];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"Detail View Controller";
+    label.text = NSLocalizedString(@"Detail View Controller", nil);
     label.frame = CGRectMake(20, 150, CGRectGetWidth(self.view.frame) - 2 * 20, 20);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.textAlignment = NSTextAlignmentCenter;
