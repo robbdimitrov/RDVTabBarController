@@ -105,8 +105,8 @@ tabBar.backgroundView.backgroundColor = [UIColor colorWithRed:245/255.0
 ## Requirements
 
 * ARC
-* iOS 5.0 or later
-* Xcode 5
+* iOS 8.0 or later
+* Xcode 11
 
 ## Contact
 
