@@ -30,7 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"Third";
+        self.title = NSLocalizedString(@"Third", nil);
     }
     return self;
 }
