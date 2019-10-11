@@ -181,7 +181,7 @@
             
             CGContextFillEllipseInRect(context, badgeBackgroundFrame);
         } else if ([self badgeBackgroundImage]) {
-            [[self badgeBackgroundImage] drawInRect:badgeBackgroundFrame];
+            [[self badgeBackgroundImage] drawInRect:CGRectMake(badgeBackgroundFrame.origin.x, badgeBackgroundFrame.origin.y, [self badgeBackgroundImage].size.width, [self badgeBackgroundImage].size.height)];
         }
         
         CGContextSetFillColorWithColor(context, [[self badgeTextColor] CGColor]);
