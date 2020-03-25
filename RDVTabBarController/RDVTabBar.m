@@ -111,6 +111,7 @@
 }
 
 - (void)setHeight:(CGFloat)height {
+    _height = height;
     [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame),
                               CGRectGetWidth(self.frame), height)];
 }
