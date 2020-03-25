@@ -67,13 +67,13 @@
     if (!tabBarHeight) {
         if (@available(iOS 11.0, *)) {
             CGFloat safeAreaBottom = UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
-            tabBarHeight = 58.f + safeAreaBottom / 1.5f;
+            tabBarHeight = [self tabBar].height + safeAreaBottom / 1.5f;
         } else {
-            tabBarHeight = 58.f;
+            tabBarHeight = [self tabBar].height;
         }
     } else if (@available(iOS 11.0, *)) {
         CGFloat safeAreaBottom = UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
-        tabBarHeight = 58.f + safeAreaBottom / 1.5f;
+        tabBarHeight = [self tabBar].height + safeAreaBottom / 1.5f;
     }
 
     if (!self.tabBarHidden) {

@@ -67,6 +67,10 @@
  */
 @property UIEdgeInsets contentEdgeInsets;
 
+/*
+ user tabbar height
+ */
+@property(nonatomic, assign) CGFloat height;
 /**
  * Sets the height of tab bar.
  */
